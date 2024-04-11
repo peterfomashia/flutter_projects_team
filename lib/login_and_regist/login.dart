@@ -1,4 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:learning_app/Home.dart';
+import 'package:learning_app/login_and_regist/register.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -42,12 +45,20 @@ class _LoginState extends State<Login> {
                   })
                 },
                 decoration: InputDecoration(
-                    labelText: 'email',
-                    prefixIcon: Icon(Icons.email_outlined),
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.lightBlue, width: 2))),
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.email_outlined),
+                  enabledBorder: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.lightBlue, width: 2)),
+                  errorText: isError ? "Invalid email or password" : null,
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2),
+                  ),
+                ),
               ),
               SizedBox(height: 30),
               TextField(
@@ -60,7 +71,6 @@ class _LoginState extends State<Login> {
                 },
                 decoration: InputDecoration(
                   labelText: "Password",
-                  errorText: isError ? "Wrong password" : null,
                   prefixIcon: Icon(Icons.lock),
                   enabledBorder: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
@@ -69,6 +79,7 @@ class _LoginState extends State<Login> {
                       borderSide: BorderSide(color: Colors.red, width: 2)),
                   focusedErrorBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red, width: 2)),
+                  errorText: isError ? "Invalid email or password" : null,
                 ),
                 obscureText: true,
               ),
@@ -88,10 +99,34 @@ class _LoginState extends State<Login> {
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 20,
+              ),
+              Visibility(
+                visible: isVisible,
+                child: Text(
+                  "Email atau Password Kosong !",
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    if (email.text == "learningapp@gmail.com" &&
+                        pass.text == "123ok") {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Home()));
+                    } else if (email.text.isEmpty || pass.text.isEmpty) {
+                      isVisible = true;
+                    } else {
+                      isError = true;
+                      email.text = "";
+                      pass.text = "";
+                    }
+                  });
+                },
                 child: Text(
                   "Login",
                   style: TextStyle(
@@ -123,13 +158,17 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       TextSpan(
-                        text: "Register !",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontSize: 18,
-                        ),
-                      ),
+                          text: "Register !",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            fontSize: 18,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => Register()))
+                                }),
                     ])),
                   )
                 ],

@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Learning_App',
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => Login(),
-      },
+      home: Login(),
     );
   }
 }
