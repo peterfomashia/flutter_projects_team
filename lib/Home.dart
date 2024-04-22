@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learning_app/fitur/challange.dart';
 import 'package:learning_app/fitur/profile.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:learning_app/fitur/translate.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,7 +17,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Halaman Home!"),
+        title: Text("Halaman Home!", style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.blue,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,31 +32,45 @@ class _HomeState extends State<Home> {
               ))
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
+      bottomNavigationBar: GNav(
+        gap: 8,
+        backgroundColor: Colors.blue,
+        color: Colors.white,
+        activeColor: Colors.greenAccent,
+        padding: EdgeInsets.all(20),
+        onTabChange: (index) {
           if (index == 0) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Home()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
           } else if (index == 1) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Home()));
-          } else {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Profile()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Translate()));
+          } else if (index == 2) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Challange()));
+          } else if (index == 3) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Profile()));
+          }
+          else{
+            Navigator.of(context).push;
           }
         },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.book), label: "Translate"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.games), label: "Challage"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: "Profile"),
-        ],
-      )
-    );
+        tabs: [
+          GButton(
+            icon: Icons.home,
+            text: 'Home',
+          ),
+          GButton(
+            icon: Icons.book,
+            text: 'Translate',
+          ),
+          GButton(
+            icon: Icons.games,
+            text: 'Challenge',
+          ),
+          GButton(
+            icon: Icons.person,
+            text: 'Profile',
+          ),
+        ],),
+    );}
   }
-}
+
 
