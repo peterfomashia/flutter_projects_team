@@ -159,7 +159,7 @@ class _RegisterState extends State<Register> {
                         text: TextSpan(children: [
                       TextSpan(
                         text: "Sudah punya akun ? ",
-                        style: TextStyle(
+                        style: TextStyle( 
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -173,9 +173,9 @@ class _RegisterState extends State<Register> {
                             fontSize: 18,
                           ),
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () => {
+                            ..onTap = () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Login()))
+                                      builder: (context) => Login()));
                                 }),
                     ])),
                   )

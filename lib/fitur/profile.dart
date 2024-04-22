@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/profile.dart';
+import 'package:learning_app/Home.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _HomeState extends State<Home> {
+class _ProfileState  extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Halaman Home!"),
+        title: Text("Profile"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
           TextButton(
               onPressed: () {},
               child: Text(
-                "Masih Wacana...",
+                "Halaman Profile",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ))
         ],
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(builder: (context) => Home()));
           } else if (index == 1) {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Home()));
+                MaterialPageRoute(builder: (context) => Profile()));
           } else {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => Profile()));
@@ -44,9 +44,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.book), label: "Translate"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.games), label: "Challage"),
+              icon: Icon(Icons.games), label: "Profile"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), label: "Profile"),
         ],

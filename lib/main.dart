@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/Home.dart';
 import 'package:learning_app/login_and_regist/login.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -10,10 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Learning_App',
-      home: Login(),
+      home: Home(),
     );
   }
 }
