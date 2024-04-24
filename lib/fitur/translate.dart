@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/profile.dart';
+import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/translate.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
