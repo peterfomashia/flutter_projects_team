@@ -4,7 +4,8 @@ import 'package:learning_app/fitur/translate.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../Home.dart';
-import 'challange.dart';
+import 'Challanges/challange.dart';
+
 
 class Translate extends StatefulWidget {
   const Translate({super.key});

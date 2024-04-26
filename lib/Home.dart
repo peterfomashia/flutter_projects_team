@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/challange.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:learning_app/fitur/translate.dart';
+
+import 'fitur/Challanges/challange.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
         gap: 8,
         backgroundColor: Colors.blue,
         color: Colors.white,
-        activeColor: Colors.greenAccent,
+        activeColor: Colors.green.shade400,
         padding: EdgeInsets.all(20),
         onTabChange: (index) {
           if (index == 0) {

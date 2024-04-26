@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
   final int dataProfil;
   const Settings({super.key, required this.dataProfil});
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +15,8 @@ class Settings extends StatelessWidget {
         title: Text("Settings", style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.blue,
       ),
-      body: Container(
+      body: Consumer<ProfilProv>(builder: (context, value, child) {
+        return Container(
         padding: EdgeInsets.only(left: 100, top: 80),
         child:
         Hero(
@@ -23,32 +28,15 @@ class Settings extends StatelessWidget {
                 height: 140,
                 decoration: BoxDecoration(
                 image:
-                DecorationImage(image: NetworkImage(profil[dataProfil].picture))),
+                DecorationImage(image: NetworkImage(value.profil[dataProfil].picture), fit: BoxFit.cover),),
              ),
           ),
           ),
-      ),
+      );
+      },)
       );
   }
 }
 
 
-class CekProfil {
-  String picture;
-  String nama;
-  String email;
-  String noTelp;
-  String alamat;
 
-  CekProfil({required this.picture ,required this.nama, required this.email, required this.noTelp, required this.alamat});
-}
-
-List<CekProfil> profil = [
-  CekProfil(
-    picture: "https://smpn3girimulyo.sch.id/media_library/images/078cef7e0da81598b49794ea180ade91.png",
-    nama: "Muhammad Fauzan",
-    email: "mhdfauzan@abc.com",
-    noTelp: "08123456789",
-    alamat: "Jl. Raya No. 123",
-  ),
-];
