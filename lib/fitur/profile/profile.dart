@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:learning_app/fitur/profile/setting.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -35,13 +36,13 @@ class _ProfileState  extends State<Profile> {
                 SizedBox(width: 20),
                 Column(
                   children: [
-                    Text("Nama :"),
+                    Text("Nama :${profil[0].nama}"),
                     SizedBox(height: 20),
-                    Text("Email :"),
+                    Text("Email : ${profil[0].email}"),
                     SizedBox(height: 20),
-                    Text("No. Telp :"),
+                    Text("No. Telp : ${profil[0].noTelp}"),
                     SizedBox(height: 20),
-                    Text("Alamat :"),
+                    Text("Alamat : ${profil[0].alamat}"),
                   ],
                 ),
               ],
@@ -65,7 +66,7 @@ class _ProfileState  extends State<Profile> {
             SizedBox(height: 30),
             TextButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Settings(dataProfil: 0)));
               },
               child: Row(
                 children: [
