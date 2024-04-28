@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:learning_app/Home.dart';
+import 'package:flutter/material.dart';
 import 'word_provider.dart';
 
 void main() {
@@ -124,50 +125,75 @@ class _WordDisplayState extends State<WordDisplay> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Word Display'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Susun kata ini ke dalam bahasa Inggris:',
-            style: TextStyle(fontSize: 20),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Tuliskan ke bahasa Inggris:',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  bahasaIndo,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 30),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                alignment: WrapAlignment.center,
+                children: displayedWords.isNotEmpty
+                    ? List.generate(displayedWords.length, (index) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            _toggleSelection(index);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isButtonDisabled[index]
+                                ? Colors.grey[100]
+                                : Colors.blue,
+                          ),
+                          child: Text(
+                            displayedWords[index]['eng'],
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                        );
+                      })
+                    : [],
+              ),
+              SizedBox(height: 50),
+              ElevatedButton(
+                onPressed: _checkTranslation,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(fontSize: 30, color: Colors.black),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 10),
-          Text(
-            bahasaIndo,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: displayedWords.isNotEmpty
-                ? List.generate(displayedWords.length, (index) {
-                    return ElevatedButton(
-                      onPressed: () {
-                        _toggleSelection(index);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isButtonDisabled[index] ? Colors.grey : Colors.blue,
-                      ),
-                      child: Text(
-                        displayedWords[index]['eng'],
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    );
-                  })
-                : [],
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _checkTranslation,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-            ),
-            child: Text('Submit'),
-          ),
-        ],
+        ),
       ),
     );
   }
