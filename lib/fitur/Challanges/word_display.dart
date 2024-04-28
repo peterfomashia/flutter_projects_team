@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'word_provider.dart';
 
 void main() {
@@ -6,16 +7,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Word Display App'),
+          title: Text('Word Display App'),
         ),
-        body: const WordDisplay(),
+        body: WordDisplay(),
       ),
     );
   }
@@ -32,9 +31,9 @@ class _WordDisplayState extends State<WordDisplay> {
   late String bahasaIndo = '';
   late String bahasaInggris = '';
   late List<Map<String, dynamic>> displayedWords = [];
-  late List<String> selectedWords;
   late List<bool> isButtonDisabled;
   List<String> submittedWords = [];
+  int currentWordIndex = 0;
 
   @override
   void initState() {
@@ -44,14 +43,15 @@ class _WordDisplayState extends State<WordDisplay> {
 
   void _loadWords() async {
     Map<String, dynamic> data = await WordProvider.fetchWords();
-    List<dynamic> words = data['kata'];
+    List<dynamic> wordsData = data['data'];
 
     setState(() {
-      bahasaIndo = data['bahasa_indo'].toString();
-      bahasaInggris = data['bahasa_inggris'].toString();
-      displayedWords = List<Map<String, dynamic>>.from(words);
-      selectedWords = List.filled(displayedWords.length, '');
+      bahasaIndo = wordsData[currentWordIndex]['bahasa_indo'].toString();
+      bahasaInggris = wordsData[currentWordIndex]['bahasa_inggris'].toString();
+      displayedWords =
+          List<Map<String, dynamic>>.from(wordsData[currentWordIndex]['kata']);
       isButtonDisabled = List.generate(displayedWords.length, (_) => false);
+      submittedWords.clear();
     });
   }
 
@@ -71,23 +71,51 @@ class _WordDisplayState extends State<WordDisplay> {
         content: Text('Jawaban Anda benar!'),
         backgroundColor: Colors.green,
       ));
+      _loadNextWords();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Jawaban Anda salah!'),
         backgroundColor: Colors.red,
       ));
+      setState(() {
+        submittedWords.clear();
+        isButtonDisabled = List.generate(displayedWords.length, (_) => false);
+      });
     }
   }
 
   void _toggleSelection(int index) {
     setState(() {
-      final word = displayedWords[index]['eng'];
-      if (submittedWords.contains(word)) {
-        submittedWords.remove(word);
-      } else {
-        submittedWords.add(word!);
-      }
       isButtonDisabled[index] = !isButtonDisabled[index];
+      if (isButtonDisabled[index]) {
+        submittedWords.add(displayedWords[index]['eng']);
+      } else {
+        submittedWords.remove(displayedWords[index]['eng']);
+      }
+    });
+  }
+
+  void _loadNextWords() async {
+    Map<String, dynamic> data = await WordProvider.fetchWords();
+    List<dynamic> wordsData = data['data'];
+
+    setState(() {
+      currentWordIndex++;
+      if (currentWordIndex < wordsData.length) {
+        bahasaIndo = wordsData[currentWordIndex]['bahasa_indo'].toString();
+        bahasaInggris =
+            wordsData[currentWordIndex]['bahasa_inggris'].toString();
+        displayedWords = List<Map<String, dynamic>>.from(
+            wordsData[currentWordIndex]['kata']);
+        isButtonDisabled = List.generate(displayedWords.length, (_) => false);
+        submittedWords.clear();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Anda telah menyelesaikan semua kata!'),
+          backgroundColor: Colors.green,
+        ));
+        _loadWords();
+      }
     });
   }
 
@@ -113,23 +141,23 @@ class _WordDisplayState extends State<WordDisplay> {
           Wrap(
             spacing: 10,
             runSpacing: 10,
-            children: List.generate(displayedWords.length, (index) {
-              return ElevatedButton(
-                onPressed: isButtonDisabled[index]
-                    ? null
-                    : () {
+            children: displayedWords.isNotEmpty
+                ? List.generate(displayedWords.length, (index) {
+                    return ElevatedButton(
+                      onPressed: () {
                         _toggleSelection(index);
                       },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      isButtonDisabled[index] ? Colors.grey : Colors.blue,
-                ),
-                child: Text(
-                  displayedWords[index]['eng'] ?? '',
-                  style: TextStyle(fontSize: 16),
-                ),
-              );
-            }),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            isButtonDisabled[index] ? Colors.grey : Colors.blue,
+                      ),
+                      child: Text(
+                        displayedWords[index]['eng'],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    );
+                  })
+                : [],
           ),
           SizedBox(height: 20),
           ElevatedButton(
@@ -139,7 +167,6 @@ class _WordDisplayState extends State<WordDisplay> {
             ),
             child: Text('Submit'),
           ),
-          SizedBox(height: 10),
         ],
       ),
     );

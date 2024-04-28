@@ -4,6 +4,7 @@ import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
 import 'package:learning_app/login_and_regist/login.dart';
 import 'package:provider/provider.dart';
+import 'package:learning_app/fitur/Challanges/word_display.dart';
 
 void main() {
   runApp(const MyApp());
