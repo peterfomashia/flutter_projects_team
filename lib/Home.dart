@@ -1,77 +1,72 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:learning_app/fitur/translate.dart';
-
-import 'fitur/Challanges/challange.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  int selected = 1; // Ganti nilai default menjadi 1 untuk menampilkan halaman Profile saat aplikasi pertama kali dijalankan
+
+  Widget bodyPage(int index){
+    switch(index){
+      case 0:
+        return Center(child: Text('Home Page'));
+      case 1:
+        return Profile();
+      default:
+        return Container(); // You can return any default widget here
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Halaman Home!", style: TextStyle(color: Colors.white),),
+        appBar: selected == 0 ? AppBar( // Hanya menampilkan AppBar jika sedang berada di halaman Home
+          title: Text("Halaman Home!", style: TextStyle(color: Colors.white),),
+          backgroundColor: Colors.blue,
+        ) : null,
+      floatingActionButton: SpeedDial(
+        foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Icon(Icons.gas_meter_sharp),
+        childMargin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         children: [
-          TextButton(
-              onPressed: () {},
-              child: Text(
-                "Masih Wacana...",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ))
+          SpeedDialChild(
+              label: "Edit",
+              child: Icon(Icons.edit),
+              shape: CircleBorder()
+          ),
+          SpeedDialChild(
+              label: "Copy",
+              child: Icon(Icons.copy),
+              shape: CircleBorder()
+          ),
         ],
       ),
-      bottomNavigationBar: GNav(
-        gap: 8,
-        backgroundColor: Colors.blue,
-        color: Colors.white,
-        activeColor: Colors.green.shade400,
-        padding: EdgeInsets.all(20),
-        onTabChange: (index) {
-          if (index == 0) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
-          } else if (index == 1) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Translate()));
-          } else if (index == 2) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Challange()));
-          } else if (index == 3) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Profile()));
-          }
-          else{
-            Navigator.of(context).push;
-          }
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: bodyPage(selected),
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        backgroundColor: Color(0xff202020),
+        activeIndex: selected,
+        icons: [
+          Icons.home,
+          Icons.account_circle,
+        ],
+        gapLocation: GapLocation.center,
+        activeColor: Colors.blue,
+        inactiveColor: Colors.white,
+        onTap: (int index){
+          setState(() {
+            selected = index;
+          });
         },
-        tabs: [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
-          ),
-          GButton(
-            icon: Icons.book,
-            text: 'Translate',
-          ),
-          GButton(
-            icon: Icons.games,
-            text: 'Challenge',
-          ),
-          GButton(
-            icon: Icons.person,
-            text: 'Profile',
-          ),
-        ],),
-    );}
+      ),
+    );
   }
-
-
+}

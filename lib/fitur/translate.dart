@@ -1,74 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/profile/profile.dart';
-import 'package:learning_app/fitur/translate.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-
-import '../Home.dart';
-import 'Challanges/challange.dart';
-
-
-class Translate extends StatefulWidget {
-  const Translate({super.key});
-
+class TranslationChatPage extends StatefulWidget {
   @override
-  State<Translate> createState() => _TranslateState();
+  _TranslationChatPageState createState() => _TranslationChatPageState();
 }
 
-class _TranslateState extends State<Translate> {
+class _TranslationChatPageState extends State   <TranslationChatPage> {
+  final TextEditingController _controller = TextEditingController();
+  String _inputText = '';
+  String _translatedText = '';
+
+  void _translateText(String text) {
+    // Implementasi fungsi terjemahan di sini
+
+    // Misalnya, Anda dapat menggunakan API terjemahan seperti Google Translate
+    // atau library pihak ketiga seperti Microsoft Translator API.
+    // Di sini, kita akan menggunakan contoh sederhana dengan hanya membalik kata.
+    setState(() {
+      _translatedText = _reverseWords(text);
+    });
+  }
+
+  String _reverseWords(String text) {
+    List<String> words = text.split(' ');
+    List<String> reversedWords = words.map((word) => word.split('').reversed.join()).toList();
+    return reversedWords.join(' ');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Teranslate", style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blue,
+        title: Text('Chat Terjemahan'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TextButton(
-              onPressed: () {},
-              child: Text(
-                "Halaman Transalate",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ))
+          Expanded(
+            child: ListView(
+              children: [
+                _buildChatBubble(_inputText, isUser: true),
+                _buildChatBubble(_translatedText, isUser: false),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    onChanged: (text) {
+                      setState(() {
+                        _inputText = text;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Ketik pesan...',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: () {
+                    _translateText(_inputText);
+                    _controller.clear();
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
-      bottomNavigationBar: GNav(
-        gap: 8,
-        backgroundColor: Colors.blue,
-        color: Colors.white,
-        activeColor: Colors.greenAccent,
-        padding: EdgeInsets.all(20),
-        onTabChange: (index) {
-          if (index == 0) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
-          } else if (index == 1) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Translate()));
-          } else if (index == 2) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Challange()));
-          } else if (index == 3) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Profile()));
-          }
-        },
-        tabs: [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
+    );
+  }
+
+  Widget _buildChatBubble(String text, {bool isUser = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      child: Align(
+        alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+        child: Container(
+          padding: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: isUser ? Colors.blue : Colors.grey[300],
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          GButton(
-            icon: Icons.book,
-            text: 'Translate',
+          child: Text(
+            text,
+            style: TextStyle(color: isUser ? Colors.white : Colors.black),
           ),
-          GButton(
-            icon: Icons.games,
-            text: 'Challenge',
-          ),
-          GButton(
-            icon: Icons.person,
-            text: 'Profile',
-          ),
-        ],),
+        ),
+      ),
     );
   }
 }
+

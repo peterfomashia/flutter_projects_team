@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:learning_app/Home.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
-import 'package:learning_app/fitur/profile/setting.dart';
+import 'package:learning_app/fitur/profile/switch.dart';
 import 'package:learning_app/login_and_regist/login.dart';
 import 'package:provider/provider.dart';
 
@@ -25,126 +25,89 @@ class _ProfileState  extends State<Profile> {
       ),
       body: Consumer<ProfilProv>(builder: (context,value,_) {
         return Container(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 80,
-                  ),
-                  radius: 80,
+        padding: EdgeInsets.only(top: 30, left: 20,),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.blue,
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 60,
                 ),
-                SizedBox(height: 20),
-                SizedBox(
-                  height: 75,
-                  child: ListView.builder(
-                    itemCount: value.profil.length,
-                    itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Text(
-                          value.profil[index].nama,
-                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20,color: Colors.black),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          value.profil[index].email,
-                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20,color: Colors.black),
-                        ),
-                      ],
-                    );
-                  },),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Edit()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                    ),
-                    child:
-                    const Text(
-                      "Edit Profile",
-                      style:
-                        TextStyle(
-                            color: Colors.white),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                TextButton(
+                radius: 60,
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 75,
+                child: ListView.builder(
+                  itemCount: value.profil.length,
+                  itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Text(
+                        value.profil[index].nama,
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20,),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        value.profil[index].email,
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                      ),
+                    ],
+                  );
+                },),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: 180,
+                height: 50,
+                child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Edit()));
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                  ),
                   child: Row(
                     children: [
-                      Icon(Icons.control_point_rounded, size: 30, color: Colors.blue,),
-                      SizedBox.fromSize(size: Size(20, 0)),
+                      Icon(Icons.edit, color: Colors.white,),
+                      SizedBox(width: 20,),
                       Text(
-                        "Cek Point",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        "Edit Profile",
+                        style:
+                          TextStyle(
+                              color: Colors.white),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Settings(dataProfil: 0)));
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.settings, size: 30, color: Colors.blue,),
-                      SizedBox.fromSize(size: Size(20, 0)),
-                      Text(
-                        "Setting",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.help, size: 30, color: Colors.blue,),
-                      SizedBox.fromSize(size: Size(20, 0)),
-                      Text(
-                        "Bantuan",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30),
-                TextButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Login()));
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text("Pengaturan", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                ],
+              ),
+              SizedBox(height: 10),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SwitchScreenMode()));
                 },
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout, size: 30, color: Colors.blue,),
-                      SizedBox.fromSize(size: Size(20, 0)),
-                      Text(
-                        "Logout",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Icon(Icons.switch_access_shortcut_add, color: Colors.blue,),
+                    SizedBox.fromSize(size: Size(20, 0)),
+                    Text(
+                      "Switch",
+                      style: TextStyle(fontWeight: FontWeight.bold,),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+
+            ],
           ),
         ),
       );
