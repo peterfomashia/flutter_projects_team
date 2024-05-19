@@ -3,24 +3,6 @@ import 'package:learning_app/Home.dart';
 import 'package:flutter/material.dart';
 import 'word_provider.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Word Display App'),
-        ),
-        body: WordDisplay(),
-      ),
-    );
-  }
-}
-
 class WordDisplay extends StatefulWidget {
   const WordDisplay({Key? key}) : super(key: key);
 
@@ -124,7 +106,7 @@ class _WordDisplayState extends State<WordDisplay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Word Display'),
+        title: Text('Word Display', style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

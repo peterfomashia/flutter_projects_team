@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
+import 'package:learning_app/fitur/Challanges/tmp.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,56 +13,60 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int selected = 1; // Ganti nilai default menjadi 1 untuk menampilkan halaman Profile saat aplikasi pertama kali dijalankan
+  int selected =
+      2;
 
-  Widget bodyPage(int index){
-    switch(index){
+  Widget bodyPage(int index) {
+    switch (index) {
       case 0:
-        return Center(child: Text('Home Page'));
+        return const Center(child: Text('Home Page'));
       case 1:
-        return Profile();
+        return const Profile();
       default:
         return Container(); // You can return any default widget here
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: selected == 0 ? AppBar( // Hanya menampilkan AppBar jika sedang berada di halaman Home
-          title: Text("Halaman Home!", style: TextStyle(color: Colors.white),),
-          backgroundColor: Colors.blue,
-        ) : null,
+      appBar: selected == 0
+          ? AppBar(
+              // Hanya menampilkan AppBar jika sedang berada di halaman Home
+              title: const Text(
+                "Halaman Home!",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.blue,
+            )
+          : null,
       floatingActionButton: SpeedDial(
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
-        child: Icon(Icons.gas_meter_sharp),
-        childMargin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        children: [
-          SpeedDialChild(
-              label: "Edit",
-              child: Icon(Icons.edit),
-              shape: CircleBorder()
-          ),
-          SpeedDialChild(
-              label: "Copy",
-              child: Icon(Icons.copy),
-              shape: CircleBorder()
-          ),
-        ],
+        childMargin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: const Icon(Icons.badge),
+        onOpen: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  Challange(),
+            ),
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: bodyPage(selected),
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: Color(0xff202020),
+        backgroundColor: const Color(0xff202020),
         activeIndex: selected,
-        icons: [
+        icons: const [
           Icons.home,
           Icons.account_circle,
         ],
         gapLocation: GapLocation.center,
         activeColor: Colors.blue,
         inactiveColor: Colors.white,
-        onTap: (int index){
+        onTap: (int index) {
           setState(() {
             selected = index;
           });
