@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_app/login_and_regist/login.dart';
+import 'package:learning_app/fitur/login_and_regist/login.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -51,7 +51,7 @@ class _RegisterState extends State<Register> {
                     enabledBorder: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.lightBlue, width: 2))),
+                        BorderSide(color: Colors.lightBlue, width: 2))),
               ),
               SizedBox(height: 30),
               TextField(
@@ -122,8 +122,8 @@ class _RegisterState extends State<Register> {
                 onPressed: () {
                   setState(() {
                     if (email.text.isEmpty |
-                        pass.text.isEmpty |
-                        passrepeat.text.isEmpty) {
+                    pass.text.isEmpty |
+                    passrepeat.text.isEmpty) {
                       isVisible = true;
                       isError = true;
                     } else if (pass.text != passrepeat.text) {
@@ -157,27 +157,27 @@ class _RegisterState extends State<Register> {
                     alignment: Alignment.center,
                     child: RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                        text: "Sudah punya akun ? ",
-                        style: TextStyle( 
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      TextSpan(
-                          text: "Login !",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                            fontSize: 18,
+                          TextSpan(
+                            text: "Sudah punya akun ? ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
+                          TextSpan(
+                              text: "Login !",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                fontSize: 18,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Login()));
+                                      builder: (context) => Login()))
                                 }),
-                    ])),
+                        ])),
                   )
                 ],
               ),

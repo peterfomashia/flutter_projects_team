@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
-import 'package:learning_app/login_and_regist/register.dart';
+import 'package:learning_app/fitur/login_and_regist/register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +17,12 @@ class _LoginState extends State<Login> {
 
   bool isError = false;
   bool isVisible = false;
+
+  Future<void> _saveLoginStatus(bool isLoggedIn) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', isLoggedIn);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +57,7 @@ class _LoginState extends State<Login> {
                   enabledBorder: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: Colors.lightBlue, width: 2)),
+                      BorderSide(color: Colors.lightBlue, width: 2)),
                   errorText: isError ? "Invalid email or password" : null,
                   errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.red, width: 2),
@@ -116,7 +123,8 @@ class _LoginState extends State<Login> {
                   setState(() {
                     if (email.text == "learningapp@gmail.com" &&
                         pass.text == "123ok") {
-                      Navigator.of(context).push(
+                      _saveLoginStatus(true);
+                      Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => Home()));
                     } else if (email.text.isEmpty || pass.text.isEmpty) {
                       isVisible = true;
@@ -149,27 +157,27 @@ class _LoginState extends State<Login> {
                     alignment: Alignment.center,
                     child: RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                        text: "Belum punya akun ? ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      TextSpan(
-                          text: "Register !",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                            fontSize: 18,
+                          TextSpan(
+                            text: "Belum punya akun ? ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => {
+                          TextSpan(
+                              text: "Register !",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                fontSize: 18,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => Register()))
                                 }),
-                    ])),
+                        ])),
                   )
                 ],
               ),

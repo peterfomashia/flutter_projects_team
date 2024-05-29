@@ -1,7 +1,9 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:learning_app/fitur/Challanges/button_translate.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
 
@@ -32,7 +34,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: selected == 0
           ? AppBar(
-              // Hanya menampilkan AppBar jika sedang berada di halaman Home
               title: const Text(
                 "Halaman Home!",
                 style: TextStyle(color: Colors.white),
@@ -55,7 +56,39 @@ class _HomeState extends State<Home> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: bodyPage(selected),
+      body: Stack(
+        children: [
+          bodyPage(selected),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Masih Wacana..",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ButtonTranslate()),
+                  );
+                },
+                child: Text("Bermain"),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                  fixedSize: Size(200, 30),
+                  elevation: 5,
+                  shadowColor: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         backgroundColor: const Color(0xff202020),
         activeIndex: selected,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/fitur/Challanges/button_translate.dart';
 import 'package:learning_app/fitur/Challanges/word_display.dart';
 
 //Tempat untuk menampung beberapa class challanges
@@ -39,7 +40,14 @@ class _ChallangeState extends State<Challange> {
                   
                 )),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  ButtonTranslate(),
+                    ),
+                  );
+                },
                 child: const Text(
                   "Halaman Challange",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
