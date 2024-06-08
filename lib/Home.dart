@@ -1,11 +1,14 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:learning_app/fitur/Challanges/button_translate.dart';
-import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
+import 'package:learning_app/fitur/profile/edit.dart';
+import 'package:learning_app/fitur/profile/profile.dart';
+import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
+import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
+import 'package:learning_app/fitur/profile/switch.dart';
+import 'package:provider/provider.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,8 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int selected =
-      2;
+  int selected = 0;
 
   Widget bodyPage(int index) {
     switch (index) {
@@ -25,7 +27,7 @@ class _HomeState extends State<Home> {
       case 1:
         return const Profile();
       default:
-        return Container(); // You can return any default widget here
+        return Container(); // Default widget if index is not found
     }
   }
 
@@ -35,22 +37,109 @@ class _HomeState extends State<Home> {
       appBar: selected == 0
           ? AppBar(
               title: const Text(
-                "Halaman Home!",
+                "Home",
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.blue,
             )
           : null,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Consumer<ProfilProv>(builder: (context, value, _) {
+              return UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://www.example.com/background.jpg"), // Change with your image url
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                currentAccountPicture: const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 60,
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.blue,
+                    size: 60,
+                  ),
+                ),
+                accountName: Row(
+                  children: [
+                    const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      value.profil.isNotEmpty
+                          ? value.profil[0].nama
+                          : 'Nama Pengguna',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                accountEmail: Row(
+                  children: [
+                    const Icon(
+                      Icons.email,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      value.profil.isNotEmpty
+                          ? value.profil[0].email
+                          : 'email@domain.com',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.edit, color: Colors.blue),
+              title: const Text('Edit Profile',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Edit()));
+              },
+            ),
+            const Divider(),
+            SwitchListTile(
+                title: const Text(
+                  'Dark Mode',
+                ),
+                value: Provider.of<SwitchModeProvider>(context, listen: false)
+                    .darkMode,
+                onChanged: (bool val) {
+                  Provider.of<SwitchModeProvider>(context, listen: false)
+                      .toggleTheme();
+                }),
+          ],
+        ),
+      ),
       floatingActionButton: SpeedDial(
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         childMargin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: const Icon(Icons.badge),
+        child: const Icon(Icons.add),
         onOpen: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  Challange(),
+              builder: (context) => const Challange(),
             ),
           );
         },
@@ -59,34 +148,34 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: [
           bodyPage(selected),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Masih Wacana..",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
+          if (selected == 0)
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Masih Wacana..",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => ButtonTranslate()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue,
+                      fixedSize: const Size(200, 30),
+                      elevation: 5,
+                    ),
+                    child: const Text("Bermain"),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ButtonTranslate()),
-                  );
-                },
-                child: Text("Bermain"),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                  fixedSize: Size(200, 30),
-                  elevation: 5,
-                  shadowColor: Colors.red,
-                ),
-              ),
-            ],
-          ),
+            ),
         ],
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
@@ -99,6 +188,7 @@ class _HomeState extends State<Home> {
         gapLocation: GapLocation.center,
         activeColor: Colors.blue,
         inactiveColor: Colors.white,
+        notchSmoothness: NotchSmoothness.softEdge,
         onTap: (int index) {
           setState(() {
             selected = index;

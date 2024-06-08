@@ -20,7 +20,6 @@ Future<bool> _getLoginStatus() async {
   return prefs.getBool('isLoggedIn') ?? false;
 }
 
-
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
 
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: value.themeData,
           title: 'Learning_App',
-          home: isLoggedIn ? Home() : Login(),
+          home: const Home(),
         );
       }),
     );

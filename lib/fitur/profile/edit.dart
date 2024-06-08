@@ -44,7 +44,9 @@ class Edit extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 30), // Jarak antar TextField (Nama dan Email
+                        const SizedBox(
+                            height:
+                                30), // Jarak antar TextField (Nama dan Email
                         TextField(
                           controller: email,
                           decoration: InputDecoration(
@@ -55,7 +57,9 @@ class Edit extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 30), // Jarak antar TextField (Nama dan Email
+                        const SizedBox(
+                            height:
+                                30), // Jarak antar TextField (Nama dan Email
                         TextField(
                           controller: alamat,
                           decoration: InputDecoration(
@@ -66,7 +70,9 @@ class Edit extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 30), // Jarak antar TextField (Nama dan Email
+                        const SizedBox(
+                            height:
+                                30), // Jarak antar TextField (Nama dan Email
                         SizedBox(
                           width: 200,
                           height: 50,
@@ -83,8 +89,12 @@ class Edit extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,),
-                            child: const Text("Save", style: TextStyle(color: Colors.white),),
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: const Text(
+                              "Save",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ],
