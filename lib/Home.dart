@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:learning_app/fitur/Challanges/button_translate.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
+import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
 import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
-import 'package:learning_app/fitur/profile/switch.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
@@ -127,6 +127,19 @@ class _HomeState extends State<Home> {
                   Provider.of<SwitchModeProvider>(context, listen: false)
                       .toggleTheme();
                 }),
+            const SizedBox(
+              height: 30,
+            ),
+            const Divider(),
+            ListTile(
+              trailing: const Icon(Icons.logout, color: Colors.blue),
+              title: const Text('Logout',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const Login()));
+              },
+            )
           ],
         ),
       ),
@@ -183,7 +196,7 @@ class _HomeState extends State<Home> {
         activeIndex: selected,
         icons: const [
           Icons.home,
-          Icons.account_circle,
+          Icons.arrow_circle_left,
         ],
         gapLocation: GapLocation.center,
         activeColor: Colors.blue,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
-import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

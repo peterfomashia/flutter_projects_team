@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CekProfil {
   String picture;
@@ -17,25 +16,23 @@ class CekProfil {
 }
 
 class ProfilProv extends ChangeNotifier {
-  List<CekProfil> _profil = [];
+  final List<CekProfil> _profil = [];
 
   List<CekProfil> get profil => _profil;
 
   ProfilProv() {
     _profil.add(CekProfil(
-      picture:
-          "",
+      picture: "",
       nama: "Admin",
       email: "admin@main.com",
       noTelp: "",
       alamat: "",
     ));
-
   }
-    void updateProfil(CekProfil profil) {
-      _profil
-          .clear(); // Jika Anda ingin mengganti profil yang ada dengan yang baru, gunakan clear() untuk menghapus profil yang ada sebelum menambahkan yang baru.
-      _profil.add(profil); // Tambahkan profil yang baru
-      notifyListeners(); // Panggil notifyListeners untuk memberitahukan kepada listener bahwa ada perubahan pada state
-    }
+  void updateProfil(CekProfil profil) {
+    _profil
+        .clear(); // Jika Anda ingin mengganti profil yang ada dengan yang baru, gunakan clear() untuk menghapus profil yang ada sebelum menambahkan yang baru.
+    _profil.add(profil); // Tambahkan profil yang baru
+    notifyListeners(); // Panggil notifyListeners untuk memberitahukan kepada listener bahwa ada perubahan pada state
+  }
 }
