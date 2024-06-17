@@ -5,6 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'fitur/profile/provider/switchProvider.dart';
 
+import 'fitur/Challanges/beginner/_servicesBeginner.dart';
+import 'fitur/Challanges/intermediate/_servicesintermediate.dart';
+import 'fitur/Challanges/advance/_servicesiAdvance.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   bool isLoggedIn = await _getLoginStatus();
@@ -28,7 +32,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ProfilProv()),
-        ChangeNotifierProvider(create: (_) => SwitchModeProvider())
+        ChangeNotifierProvider(create: (_) => SwitchModeProvider()),
+        ChangeNotifierProvider(
+          create: (context) => BeginnerButtonListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => IntermediateButtonListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AdvanceButtonListProvider(),
+        )
       ],
       child: Consumer<SwitchModeProvider>(builder: (context, value, _) {
         return MaterialApp(

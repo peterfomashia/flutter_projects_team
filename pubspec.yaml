@@ -40,6 +40,8 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   animated_bottom_navigation_bar: ^1.3.3
   shared_preferences: ^2.0.8
+  http: ^1.2.1
+
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +64,12 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/example.json
+    - assets/dictionary.json
+    - assets/beginnerLevel.json
+    - assets/intermediate.json
+    - assets/advance.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,0 +1,171 @@
+[
+    {
+        "id" : 1,
+        "kalimat" : "Kamu bertanggung jawab",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "You"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "are"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "responsible"
+            }
+        ],
+        "typeAns" : "B"
+    },
+    {
+        "id" : 2,
+        "kalimat" : "Ini tidak perlh",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "It is"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "not"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "Necessary"
+            }
+        ],
+        "typeAns" : "B"
+    },
+    {
+        "id" : 3,
+        "kalimat" : "Saya minum air",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "I"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "drink"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "water"
+            }
+        ],
+        "typeAns" : "B"
+    },
+    {
+        "id" : 4,
+        "kalimat" : "Dia seorang wanita",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "She is"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "a"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "woman"
+            }
+        ],
+        "typeAns" : "B"
+    },
+    {
+        "id" : 5,
+        "kalimat" : "Saya makan apel itu",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "I"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "eat"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "the"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "apple"
+            }
+        ],
+        "typeAns" : "C"
+    },
+    {
+        "id" : 6,
+        "kalimat" : "Saya seorang mahasiswa",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "I am"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "a"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "student"
+            }
+        ],
+        "typeAns" : "B"
+    },
+    {
+        "id" : 7,
+        "kalimat" : "Seorang wanita dan sebuah apel",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "A"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "woman"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "and"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "an"
+            },
+            {
+                "id" : 5,
+                "cursor" : false,
+                "word" : "apple"
+            }
+        ],
+        "typeAns" : "D"
+    }
+]
