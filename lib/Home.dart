@@ -5,8 +5,8 @@ import 'package:learning_app/fitur/Challanges/tmp.dart';
 import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
-import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
-import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
+import 'package:learning_app/provider/profil_prov.dart';
+import 'package:learning_app/provider/switchProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 

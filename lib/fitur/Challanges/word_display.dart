@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'word_provider.dart';
+import 'package:learning_app/provider/word_provider.dart';
 
 class WordDisplay extends StatefulWidget {
   const WordDisplay({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
+import 'package:learning_app/provider/profil_prov.dart';
 import 'package:provider/provider.dart';
 
 class Edit extends StatelessWidget {

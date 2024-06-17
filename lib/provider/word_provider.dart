@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class WordProvider {
   static Future<Map<String, dynamic>> fetchWords() async {
     List<List<Map<String, dynamic>>> words = [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
+import 'package:learning_app/provider/switchProvider.dart';
 import 'package:provider/provider.dart';
 
 class SwitchScreenMode extends StatelessWidget {

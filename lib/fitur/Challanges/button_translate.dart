@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Word.dart';
+import 'package:learning_app/provider/Word.dart';
 import 'EndGamePage.dart';
 
 class ButtonTranslate extends StatefulWidget {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
-import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
+import 'package:learning_app/provider/profil_prov.dart';
+import 'package:learning_app/provider/structureSentence/_Provider.dart';
+import 'package:learning_app/provider/structureSentence/_servicesBeginner.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'fitur/profile/provider/switchProvider.dart';
+import 'provider/switchProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +30,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ProfilProv()),
-        ChangeNotifierProvider(create: (_) => SwitchModeProvider())
+        ChangeNotifierProvider(create: (_) => SwitchModeProvider()),
+        ChangeNotifierProvider(
+          create: (context) => BeginnerButtonListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WordProvider(),
+        ),
       ],
       child: Consumer<SwitchModeProvider>(builder: (context, value, _) {
         return MaterialApp(

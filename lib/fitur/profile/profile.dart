@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
-import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
+import 'package:learning_app/provider/profil_prov.dart';
 import 'package:learning_app/fitur/profile/switch.dart';
 import 'package:provider/provider.dart';
 
