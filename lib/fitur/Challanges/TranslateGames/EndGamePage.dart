@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
-import 'package:learning_app/fitur/Challanges/NextLevel.dart';
-import 'package:learning_app/fitur/Challanges/button_translate.dart';
+import 'package:learning_app/fitur/Challanges/TranslateGames/NextLevel.dart';
+import 'package:learning_app/fitur/Challanges/TranslateGames/button_translate.dart';
 
 class EndGamePage extends StatelessWidget {
   final int points;

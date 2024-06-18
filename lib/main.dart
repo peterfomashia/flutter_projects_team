@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'fitur/profile/provider/switchProvider.dart';
 
-import 'fitur/Challanges/beginner/_servicesBeginner.dart';
-import 'fitur/Challanges/intermediate/_servicesintermediate.dart';
-import 'fitur/Challanges/advance/_servicesiAdvance.dart';
+import 'fitur/Challanges/Sentences/beginner/_servicesBeginner.dart';
+import 'fitur/Challanges/Sentences/intermediate/_servicesintermediate.dart';
+import 'fitur/Challanges/Sentences/advance/_servicesiAdvance.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

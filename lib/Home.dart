@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:learning_app/fitur/Challanges/button_translate.dart';
+import 'package:learning_app/fitur/Challanges/TranslateGames/button_translate.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
 import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
