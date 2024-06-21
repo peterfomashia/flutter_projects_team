@@ -8,6 +8,7 @@ import 'fitur/profile/provider/switchProvider.dart';
 import 'fitur/Challanges/Sentences/beginner/_servicesBeginner.dart';
 import 'fitur/Challanges/Sentences/intermediate/_servicesintermediate.dart';
 import 'fitur/Challanges/Sentences/advance/_servicesiAdvance.dart';
+import 'fitur/Challanges/myDictionary/_Provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AdvanceButtonListProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WordProvider(),
+        ),
       ],
       child: Consumer<SwitchModeProvider>(builder: (context, value, _) {
         return MaterialApp(

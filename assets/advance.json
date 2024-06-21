@@ -1,6 +1,134 @@
 [
     {
         "id" : 1,
+        "kalimat" : "apakah mereka manusia",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "Are"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "they"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "human"
+            }
+        ],
+        "typeAns" : "A"
+    },
+        {
+        "id" : 2,
+        "kalimat" : "Apa nama resminya",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "What"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "name"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "official"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "is"
+            },
+            {
+                "id" : 5,
+                "cursor" : false,
+                "word" : "the"
+            }
+        ],
+        "typeAns" : "D1"
+    },
+    {
+        "id" : 3,
+        "kalimat" : "She is my future girlfriend",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "Dia"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "adalah"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "calon"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "pacar"
+            },
+            {
+                "id" : 5,
+                "cursor" : false,
+                "word" : "saya"
+            }
+        ],
+        "typeAns" : "C"
+    },
+    {
+        "id" : 4,
+        "kalimat" : "Saya cinta dia dan seluruh keluarga saya",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "I"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "love"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "her"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "and"
+            },
+            {
+                "id" : 5,
+                "cursor" : false,
+                "word" : "whole"
+            },
+            {
+                "id" : 6,
+                "cursor" : false,
+                "word" : "My"
+            },
+            {
+                "id" : 7,
+                "cursor" : false,
+                "word" : "family"
+            }
+        ],
+        "typeAns" : "E"
+    },
+    {
+        "id" : 6,
         "kalimat" : "Anak-anak itu tidak bertanggung jawab",
         "words" : [
             {
@@ -16,7 +144,7 @@
             {
                 "id" : 3,
                 "cursor" : false,
-                "word" : "the"
+                "word" : "The"
             },
             {
                 "id" : 4,
@@ -29,125 +157,37 @@
                 "word" : "responsible"
             }
         ],
-        "typeAns" : "F"
+        "typeAns" : "F1"
     },
     {
-        "id" : 2,
-        "kalimat" : "Dia makan roti",
-        "words" : [
+        "id":7,
+        "kalimat": "Return the horse to him",
+        "words": [
             {
-                "id" : 1,
-                "cursor" : false,
-                "word" : "He"
+                "id":1,
+                "cursor":false,
+                "word": "Kembalikan"
             },
             {
-                "id" : 2,
-                "cursor" : false,
-                "word" : "eats"
+                "id":2,
+                "cursor":false,
+                "word": "itu"
             },
-            {
-                "id" : 3,
-                "cursor" : false,
-                "word" : "bread"
+                        {
+                "id":3,
+                "cursor":false,
+                "word": "Kuda"
+            },
+                        {
+                "id":4,
+                "cursor":false,
+                "word": "kepadanya"
             }
         ],
-        "typeAns" : "B"
+        "typeAns": "B1"
     },
     {
-        "id" : 3,
-        "kalimat" : "Saya minum air",
-        "words" : [
-            {
-                "id" : 1,
-                "cursor" : false,
-                "word" : "I"
-            },
-            {
-                "id" : 2,
-                "cursor" : false,
-                "word" : "drink"
-            },
-            {
-                "id" : 3,
-                "cursor" : false,
-                "word" : "water"
-            }
-        ],
-        "typeAns" : "B"
-    },
-    {
-        "id" : 4,
-        "kalimat" : "Dia seorang wanita",
-        "words" : [
-            {
-                "id" : 1,
-                "cursor" : false,
-                "word" : "She is"
-            },
-            {
-                "id" : 2,
-                "cursor" : false,
-                "word" : "a"
-            },
-            {
-                "id" : 3,
-                "cursor" : false,
-                "word" : "woman"
-            }
-        ],
-        "typeAns" : "B"
-    },
-    {
-        "id" : 5,
-        "kalimat" : "Saya makan apel itu",
-        "words" : [
-            {
-                "id" : 1,
-                "cursor" : false,
-                "word" : "I"
-            },
-            {
-                "id" : 2,
-                "cursor" : false,
-                "word" : "eat"
-            },
-            {
-                "id" : 3,
-                "cursor" : false,
-                "word" : "the"
-            },
-            {
-                "id" : 4,
-                "cursor" : false,
-                "word" : "apple"
-            }
-        ],
-        "typeAns" : "C"
-    },
-    {
-        "id" : 6,
-        "kalimat" : "Saya seorang mahasiswa",
-        "words" : [
-            {
-                "id" : 1,
-                "cursor" : false,
-                "word" : "I am"
-            },
-            {
-                "id" : 2,
-                "cursor" : false,
-                "word" : "a"
-            },
-            {
-                "id" : 3,
-                "cursor" : false,
-                "word" : "student"
-            }
-        ],
-        "typeAns" : "B"
-    },
-    {
-        "id" : 7,
+        "id" : 8,
         "kalimat" : "Seorang wanita dan sebuah apel",
         "words" : [
             {
@@ -176,6 +216,53 @@
                 "word" : "apple"
             }
         ],
-        "typeAns" : "D"
+        "typeAns" : "C"
+    },
+    {
+        "id" : 9,
+        "kalimat" : "Tolong pertimbangkan pekerjaan yang saya tawarkan kepadamu",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "Please"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "consider"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "the"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "job"
+            },
+            {
+                "id" : 5,
+                "cursor" : false,
+                "word" : "I"
+            },
+            {
+                "id" : 6,
+                "cursor" : false,
+                "word" : "offer"
+            },
+            {
+                "id" : 7,
+                "cursor" : false,
+                "word" : "to"
+            },
+            {
+                "id" : 8,
+                "cursor" : false,
+                "word" : "you"
+            }
+        ],
+        "typeAns" : "F"
     }
 ]

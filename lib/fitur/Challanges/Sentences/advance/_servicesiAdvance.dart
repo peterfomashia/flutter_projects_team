@@ -5,16 +5,26 @@ import 'package:flutter/services.dart';
 class AdvanceButtonListProvider with ChangeNotifier {
   int play = 0;
   int indexing = 0;
+  int get totalSentences => elementList.length;
+  int get completedSentences => indexing + 1;
+  String get currentLanguage => indexing < elementList.length ? elementList[indexing]['language'] : "";
   List<Map> firstContainer = [];
   List<Map> elementList = [];
   List<Map> element = [];
   List<int> answer = [];
   Map<String, List<int>> groupAnswerCursor = {
-    "A": [1, 2],
-    "B": [1, 2, 3],
-    "C": [1, 2, 3, 4],
-    "D": [1, 2, 3, 4, 5],
-    "F": [3, 1, 2, 4, 5],
+    "A": [1, 2, 3],
+    "B": [1, 2, 3, 4],
+    "C": [1, 2, 3, 4, 5],
+    "D": [1, 2, 3, 4, 5, 6],
+    "E": [1, 2, 3, 4, 5, 6, 7],
+    "F": [1, 2, 3, 4, 5, 6, 7, 8],
+    "G": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+
+    "B1": [1, 3, 2, 4],
+    "F1": [3, 1, 2, 4, 5],
+    "D1": [1, 4, 5, 3, 2],
+    "G1": [1, 2, 3, 4, 5, 6, 7, 8],
   };
 
   bool showAnimation = false;
@@ -28,7 +38,7 @@ class AdvanceButtonListProvider with ChangeNotifier {
 
   Future<void> _loadData() async {
     try {
-      String jsonString = await rootBundle.loadString('assets/advance.json');
+      String jsonString = await rootBundle.loadString('assets/advance copy.json');
       elementList = List<Map>.from(jsonDecode(jsonString));
       element = List<Map>.from(elementList[indexing]['words']);
       element.shuffle();

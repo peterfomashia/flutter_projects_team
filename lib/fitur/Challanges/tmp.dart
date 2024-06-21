@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/fitur/Challanges/myDictionary/dictionary.dart';
 import 'Sentences/HandlerButton.dart';
+// import './myDictionary/dictionary.dart';
 import 'package:learning_app/fitur/Challanges/TranslateGames/button_translate.dart';
 
 class Challange extends StatefulWidget {
@@ -25,7 +27,6 @@ class _ChallangeState extends State<Challange> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             Card(
               elevation: 8,
               shape: RoundedRectangleBorder(
@@ -75,7 +76,6 @@ class _ChallangeState extends State<Challange> {
               ),
             ),
             const SizedBox(height: 10),
-
             Card(
               elevation: 8,
               shape: RoundedRectangleBorder(
@@ -136,7 +136,7 @@ class _ChallangeState extends State<Challange> {
                   borderRadius: BorderRadius.circular(15),
                   image: const DecorationImage(
                     image: NetworkImage(
-                        "https://via.placeholder.com/400x200.png?text=Halaman+Challange"),
+                        "https://t4.ftcdn.net/jpg/01/29/14/65/360_F_129146509_I99Ijq6C9Z27ZdQq7aMJ8qJuj7oMFlIN.jpg?text=Vocabulary"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -159,7 +159,10 @@ class _ChallangeState extends State<Challange> {
                           child: const Text('Open',
                               style: TextStyle(color: Colors.white)),
                           onPressed: () {
-                            // Tambahkan navigasi atau aksi yang sesuai di sini
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WordListScreen()));
                           },
                         ),
                       ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '_servicesBeginner.dart';
+import './_servicesBeginner.dart';
 
 class ButtonTransferBeginner extends StatelessWidget {
   Future<bool?> _showBackDialog(BuildContext context) {
@@ -33,18 +33,13 @@ class ButtonTransferBeginner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Provider Prototype - Beginner'),
+        title: Text('Beginner Level'),
+        backgroundColor: Colors.blue,
       ),
-      body: PopScope(
-        canPop: false,
-        onPopInvoked: (didPop) async {
-          if (didPop) {
-            return;
-          }
+      body: WillPopScope(
+        onWillPop: () async {
           final bool shouldPop = await _showBackDialog(context) ?? false;
-          if (context.mounted && shouldPop) {
-            Navigator.pop(context);
-          }
+          return shouldPop;
         },
         child: Stack(
           children: [
@@ -53,10 +48,49 @@ class ButtonTransferBeginner extends StatelessWidget {
               children: <Widget>[
                 Consumer<BeginnerButtonListProvider>(
                   builder: (context, clickedProvider, _) {
+                    if (clickedProvider.indexing >=
+                        clickedProvider.elementList.length) {
+                      // Pop up if clearly
+                      return Center(
+                        child: Container(
+                            //
+                            ),
+                      );
+                    } else {
+                      // Displaying a Sentence
+                      return Container(
+                        // color: Colors.blue,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(color: Colors.black, width: 2)),
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          clickedProvider.elementList[clickedProvider.indexing]
+                              ['kalimat'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Consumer<BeginnerButtonListProvider>(
+                  builder: (context, clickedProvider, _) {
                     return Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      color: Colors.blue,
+                      width: 400,
+                      height: 180,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.blueGrey, width: 1)),
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 8.0,
@@ -68,13 +102,23 @@ class ButtonTransferBeginner extends StatelessWidget {
                                   onPressed: () {
                                     bool access = item['cursor'];
                                     clickedProvider.updateElement(
-                                        access, item['id']);
+                                      access,
+                                      item['id'],
+                                    );
                                     clickedProvider.updateFirstContainer(
-                                        access, item);
+                                      access,
+                                      item,
+                                    );
                                     clickedProvider.updateListAnswer(
-                                        0, item['id']);
+                                      0,
+                                      item['id'],
+                                    );
                                   },
-                                  child: Text('${item['word']} ${item['id']}'),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Text('${item['word']}'),
+                                  ),
                                 )
                               : SizedBox.shrink();
                         }).toList(),
@@ -88,7 +132,7 @@ class ButtonTransferBeginner extends StatelessWidget {
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       height: 200,
-                      color: Colors.green,
+                      // color: Colors.grey[200],
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 8.0,
@@ -100,13 +144,19 @@ class ButtonTransferBeginner extends StatelessWidget {
                                   onPressed: () {
                                     bool access = item['cursor'];
                                     clickedProvider.updateElement(
-                                        access, item['id']);
+                                      access,
+                                      item['id'],
+                                    );
                                     clickedProvider.updateFirstContainer(
-                                        access, item);
+                                      access,
+                                      item,
+                                    );
                                     clickedProvider.updateListAnswer(
-                                        1, item['id']);
+                                      1,
+                                      item['id'],
+                                    );
                                   },
-                                  child: Text('${item['word']} ${item['id']}'),
+                                  child: Text('${item['word']}'),
                                 )
                               : SizedBox.shrink();
                         }).toList(),
@@ -210,9 +260,26 @@ class AnimatedButton extends StatelessWidget {
           ),
         );
       },
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: child,
+      child: IntrinsicWidth(
+        // adding IntrinsicWidth
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Colors.blue), // background color button
+            foregroundColor:
+                MaterialStateProperty.all<Color>(Colors.white), // color of text
+            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0)), // adding padding horizontal and vertikal
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0), //
+              ),
+            ),
+          ),
+          child: child, // display the child of 'word'
+        ),
       ),
     );
   }

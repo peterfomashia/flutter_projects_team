@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '_servicesiAdvance.dart';
+import './_servicesiAdvance.dart';
 
 class ButtonTransferAdvance extends StatelessWidget {
   Future<bool?> _showBackDialog(BuildContext context) {
@@ -33,30 +33,98 @@ class ButtonTransferAdvance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Provider Prototype - Beginner'),
+        title: Text('Advance Level'),
+        backgroundColor: Colors.blue,
       ),
-      body: PopScope(
-        canPop: false,
-        onPopInvoked: (didPop) async {
-          if (didPop) {
-            return;
-          }
+      body: WillPopScope(
+        onWillPop: () async {
           final bool shouldPop = await _showBackDialog(context) ?? false;
-          if (context.mounted && shouldPop) {
-            Navigator.pop(context);
-          }
+          return shouldPop;
         },
         child: Stack(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Consumer<AdvanceButtonListProvider>( // Progress Bar
+                  builder: (context, clickedProvider, _) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: 360,
+                          height: 10,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: LinearProgressIndicator(
+                              value: clickedProvider.completedSentences /
+                                  clickedProvider.totalSentences,
+                              backgroundColor: Colors.grey,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blue, // Warna background icon
+                            borderRadius: BorderRadius.circular(100), // Radius background icon
+                          ),
+                          padding: EdgeInsets.all(5), // Padding untuk background icon
+                          child: Icon(
+                            Icons.volume_up,
+                            size: 40,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                            "Language: ${clickedProvider.currentLanguage}", // Language type
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent)),
+                        SizedBox(height: 15),
+                      ],
+                    );
+                  },
+                ),
+                Consumer<AdvanceButtonListProvider>(
+                  builder: (context, clickedProvider, _) {
+                    if (clickedProvider.indexing >=
+                        clickedProvider.elementList.length) {
+                      return Center(
+                        child: Container(
+                            // pop up message
+                            ),
+                      );
+                    } else {
+                      return Container(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          clickedProvider.elementList[clickedProvider.indexing]
+                              ['kalimat'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 Consumer<AdvanceButtonListProvider>(
                   builder: (context, clickedProvider, _) {
                     return Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      color: Colors.blue,
+                      width: 360,
+                      height: 180,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.blueGrey, width: 1)),
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 8.0,
@@ -68,13 +136,23 @@ class ButtonTransferAdvance extends StatelessWidget {
                                   onPressed: () {
                                     bool access = item['cursor'];
                                     clickedProvider.updateElement(
-                                        access, item['id']);
+                                      access,
+                                      item['id'],
+                                    );
                                     clickedProvider.updateFirstContainer(
-                                        access, item);
+                                      access,
+                                      item,
+                                    );
                                     clickedProvider.updateListAnswer(
-                                        0, item['id']);
+                                      0,
+                                      item['id'],
+                                    );
                                   },
-                                  child: Text('${item['word']} ${item['id']}'),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Text('${item['word']}'),
+                                  ),
                                 )
                               : SizedBox.shrink();
                         }).toList(),
@@ -88,7 +166,6 @@ class ButtonTransferAdvance extends StatelessWidget {
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       height: 200,
-                      color: Colors.green,
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 8.0,
@@ -100,13 +177,19 @@ class ButtonTransferAdvance extends StatelessWidget {
                                   onPressed: () {
                                     bool access = item['cursor'];
                                     clickedProvider.updateElement(
-                                        access, item['id']);
+                                      access,
+                                      item['id'],
+                                    );
                                     clickedProvider.updateFirstContainer(
-                                        access, item);
+                                      access,
+                                      item,
+                                    );
                                     clickedProvider.updateListAnswer(
-                                        1, item['id']);
+                                      1,
+                                      item['id'],
+                                    );
                                   },
-                                  child: Text('${item['word']} ${item['id']}'),
+                                  child: Text('${item['word']}'),
                                 )
                               : SizedBox.shrink();
                         }).toList(),
@@ -116,7 +199,7 @@ class ButtonTransferAdvance extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {
@@ -124,8 +207,7 @@ class ButtonTransferAdvance extends StatelessWidget {
                             .read<AdvanceButtonListProvider>()
                             .updateIndexElement();
                       },
-                      label: Text("Check"),
-                      icon: Icon(Icons.arrow_forward_ios),
+                      label: Text("Submit"),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.red,
@@ -134,7 +216,6 @@ class ButtonTransferAdvance extends StatelessWidget {
                         shadowColor: Colors.red,
                       ),
                     ),
-                    SizedBox(width: 45),
                   ],
                 ),
               ],
@@ -182,6 +263,7 @@ class ButtonTransferAdvance extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class AnimatedButton extends StatelessWidget {
@@ -210,9 +292,27 @@ class AnimatedButton extends StatelessWidget {
           ),
         );
       },
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: child,
+      child: IntrinsicWidth(
+        // adding IntrinsicWidth 
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Colors.blue), // background color button 
+            foregroundColor: MaterialStateProperty.all<Color>(
+                Colors.white), // color of text
+            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0)), // adding padding horizontal and vertikal
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(8.0), // 
+              ),
+            ),
+          ),
+          child: child, // display the child of 'word'
+        ),
       ),
     );
   }
