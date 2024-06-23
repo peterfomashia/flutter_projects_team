@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './_servicesiAdvance.dart';
+import '_servicesiAdvance.dart';
+import 'components/AnimatedButton.dart';
+import 'components/SubmitButton.dart';
+import 'components/ProgressBar.dart';
+import 'components/LanguageIndicator.dart';
+import 'components/AnimationBox.dart';
 
-class ButtonTransferAdvance extends StatelessWidget {
+class ButtonTransferAdvance extends StatefulWidget {
+  @override
+  _ButtonTransferAdvanceState createState() => _ButtonTransferAdvanceState();
+}
+
+class _ButtonTransferAdvanceState extends State<ButtonTransferAdvance> {
   Future<bool?> _showBackDialog(BuildContext context) {
     return showDialog<bool>(
       context: context,
@@ -46,48 +56,9 @@ class ButtonTransferAdvance extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Consumer<AdvanceButtonListProvider>( // Progress Bar
-                  builder: (context, clickedProvider, _) {
-                    return Column(
-                      children: [
-                        Container(
-                          width: 360,
-                          height: 10,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            child: LinearProgressIndicator(
-                              value: clickedProvider.completedSentences /
-                                  clickedProvider.totalSentences,
-                              backgroundColor: Colors.grey,
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.blue, // Warna background icon
-                            borderRadius: BorderRadius.circular(100), // Radius background icon
-                          ),
-                          padding: EdgeInsets.all(5), // Padding untuk background icon
-                          child: Icon(
-                            Icons.volume_up,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                            "Language: ${clickedProvider.currentLanguage}", // Language type
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent)),
-                        SizedBox(height: 15),
-                      ],
-                    );
-                  },
-                ),
+                ProgressBar(),
+                SizedBox(height: 20),
+                LanguageIndicator(),
                 Consumer<AdvanceButtonListProvider>(
                   builder: (context, clickedProvider, _) {
                     if (clickedProvider.indexing >=
@@ -114,17 +85,16 @@ class ButtonTransferAdvance extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Consumer<AdvanceButtonListProvider>(
                   builder: (context, clickedProvider, _) {
                     return Container(
                       width: 360,
                       height: 180,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.blueGrey, width: 1)),
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.blueGrey, width: 1),
+                      ),
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 8.0,
@@ -150,8 +120,11 @@ class ButtonTransferAdvance extends StatelessWidget {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Text('${item['word']}'),
+                                        horizontal: 0),
+                                    child: Text(
+                                      '${item['word']}',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
                                   ),
                                 )
                               : SizedBox.shrink();
@@ -160,7 +133,7 @@ class ButtonTransferAdvance extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 Consumer<AdvanceButtonListProvider>(
                   builder: (context, clickedProvider, _) {
                     return Container(
@@ -189,7 +162,10 @@ class ButtonTransferAdvance extends StatelessWidget {
                                       item['id'],
                                     );
                                   },
-                                  child: Text('${item['word']}'),
+                                  child: Text(
+                                    '${item['word']}',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                 )
                               : SizedBox.shrink();
                         }).toList(),
@@ -198,32 +174,13 @@ class ButtonTransferAdvance extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        context
-                            .read<AdvanceButtonListProvider>()
-                            .updateIndexElement();
-                      },
-                      label: Text("Submit"),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.red,
-                        fixedSize: Size(200, 30),
-                        elevation: 5,
-                        shadowColor: Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
+                SubmitButton(),
               ],
             ),
             Consumer<AdvanceButtonListProvider>(
               builder: (context, clickedProvider, _) {
                 if (clickedProvider.showAnimation) {
-                  return _buildAnimationBox(
+                  return buildAnimationBox(
                     show: clickedProvider.showAnimation,
                     color: clickedProvider.showCorrectAnimation
                         ? Color.fromARGB(255, 60, 150, 22)
@@ -247,7 +204,7 @@ class ButtonTransferAdvance extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'All sentences explored!',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -263,83 +220,4 @@ class ButtonTransferAdvance extends StatelessWidget {
       ),
     );
   }
-
-}
-
-class AnimatedButton extends StatelessWidget {
-  final int index;
-  final VoidCallback onPressed;
-  final Widget child;
-
-  AnimatedButton({
-    required this.index,
-    required this.onPressed,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TweenAnimationBuilder(
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-      tween: Tween<double>(begin: 0.0, end: 1.0),
-      builder: (context, value, child) {
-        return Transform.translate(
-          offset: Offset(0.0, 50.0 * value),
-          child: Opacity(
-            opacity: value,
-            child: child,
-          ),
-        );
-      },
-      child: IntrinsicWidth(
-        // adding IntrinsicWidth 
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-                Colors.blue), // background color button 
-            foregroundColor: MaterialStateProperty.all<Color>(
-                Colors.white), // color of text
-            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0)), // adding padding horizontal and vertikal
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(8.0), // 
-              ),
-            ),
-          ),
-          child: child, // display the child of 'word'
-        ),
-      ),
-    );
-  }
-}
-
-Widget _buildAnimationBox({
-  required bool show,
-  required Color color,
-  required IconData icon,
-}) {
-  return Center(
-    child: AnimatedOpacity(
-      opacity: show ? 1.0 : 0.0,
-      duration: Duration(milliseconds: 500),
-      child: Container(
-        width: 200,
-        height: 200,
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.82),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Icon(
-          icon,
-          size: 100,
-          color: Colors.white,
-        ),
-      ),
-    ),
-  );
 }

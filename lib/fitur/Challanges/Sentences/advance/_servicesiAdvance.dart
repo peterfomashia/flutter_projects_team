@@ -7,7 +7,8 @@ class AdvanceButtonListProvider with ChangeNotifier {
   int indexing = 0;
   int get totalSentences => elementList.length;
   int get completedSentences => indexing + 1;
-  String get currentLanguage => indexing < elementList.length ? elementList[indexing]['language'] : "";
+  String get currentLanguage =>
+      indexing < elementList.length ? elementList[indexing]['language'] : "";
   List<Map> firstContainer = [];
   List<Map> elementList = [];
   List<Map> element = [];
@@ -20,7 +21,6 @@ class AdvanceButtonListProvider with ChangeNotifier {
     "E": [1, 2, 3, 4, 5, 6, 7],
     "F": [1, 2, 3, 4, 5, 6, 7, 8],
     "G": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-
     "B1": [1, 3, 2, 4],
     "F1": [3, 1, 2, 4, 5],
     "D1": [1, 4, 5, 3, 2],
@@ -38,7 +38,8 @@ class AdvanceButtonListProvider with ChangeNotifier {
 
   Future<void> _loadData() async {
     try {
-      String jsonString = await rootBundle.loadString('assets/advance copy.json');
+      String jsonString =
+          await rootBundle.loadString('assets/advance copy.json');
       elementList = List<Map>.from(jsonDecode(jsonString));
       element = List<Map>.from(elementList[indexing]['words']);
       element.shuffle();
