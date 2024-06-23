@@ -1,6 +1,7 @@
 [
     {
         "id" : 1,
+        "language" : "Indonesia",
         "kalimat" : "Dia minum",
         "words" : [
             {
@@ -18,6 +19,7 @@
     },
     {
         "id" : 2,
+        "language" : "Indonesia",
         "kalimat" : "Dia makan roti",
         "words" : [
             {
@@ -40,6 +42,7 @@
     },
     {
         "id" : 3,
+        "language" : "Indonesia",
         "kalimat" : "Saya minum air",
         "words" : [
             {
@@ -62,29 +65,64 @@
     },
     {
         "id" : 4,
+        "language" : "Indonesia",
         "kalimat" : "Dia seorang wanita",
         "words" : [
             {
                 "id" : 1,
                 "cursor" : false,
-                "word" : "She is"
+                "word" : "She"
             },
             {
                 "id" : 2,
                 "cursor" : false,
-                "word" : "a"
+                "word" : "is"
             },
             {
                 "id" : 3,
                 "cursor" : false,
+                "word" : "a"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
                 "word" : "woman"
             }
         ],
-        "typeAns" : "B"
+        "typeAns" : "C"
     },
     {
         "id" : 5,
-        "kalimat" : "Saya makan apel itu",
+        "language" : "Indonesia",
+        "kalimat" : "Dia adalah anak laki-laki",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "He"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "is"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "a"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "boy"
+            }
+        ],
+        "typeAns" : "C"
+    },
+    {
+        "id" : 6,
+        "language" : "Indonesia",
+        "kalimat" : "Saya seorang mahasiswa",
         "words" : [
             {
                 "id" : 1,
@@ -94,45 +132,24 @@
             {
                 "id" : 2,
                 "cursor" : false,
-                "word" : "eat"
+                "word" : "am"
             },
             {
                 "id" : 3,
                 "cursor" : false,
-                "word" : "the"
+                "word" : "a"
             },
             {
                 "id" : 4,
                 "cursor" : false,
-                "word" : "apple"
+                "word" : "student"
             }
         ],
         "typeAns" : "C"
     },
     {
-        "id" : 6,
-        "kalimat" : "Saya seorang mahasiswa",
-        "words" : [
-            {
-                "id" : 1,
-                "cursor" : false,
-                "word" : "I am"
-            },
-            {
-                "id" : 2,
-                "cursor" : false,
-                "word" : "a"
-            },
-            {
-                "id" : 3,
-                "cursor" : false,
-                "word" : "student"
-            }
-        ],
-        "typeAns" : "B"
-    },
-    {
         "id" : 7,
+        "language" : "Indonesia",
         "kalimat" : "Seorang wanita dan sebuah apel",
         "words" : [
             {
@@ -154,6 +171,39 @@
                 "id" : 4,
                 "cursor" : false,
                 "word" : "an"
+            },
+            {
+                "id" : 5,
+                "cursor" : false,
+                "word" : "apple"
+            }
+        ],
+        "typeAns" : "D"
+    },
+    {
+        "id" : 8,
+        "language" : "Indonesia",
+        "kalimat" : "wanita itu makan sebuah apel",
+        "words" : [
+            {
+                "id" : 1,
+                "cursor" : false,
+                "word" : "The"
+            },
+            {
+                "id" : 2,
+                "cursor" : false,
+                "word" : "woman"
+            },
+            {
+                "id" : 3,
+                "cursor" : false,
+                "word" : "eats"
+            },
+            {
+                "id" : 4,
+                "cursor" : false,
+                "word" : "the"
             },
             {
                 "id" : 5,

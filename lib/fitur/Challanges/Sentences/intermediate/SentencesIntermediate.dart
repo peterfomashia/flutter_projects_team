@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '_servicesintermediate.dart';
-import './components/AnimatedButton.dart';
-import './components/SubmitButton.dart';
-import './components/ProgressBar.dart';
-import './components/LanguageIndicator.dart';
-import './components/AnimationBox.dart';
+import 'componentsIntermediate/AnimatedButton.dart';
+import 'componentsIntermediate/SubmitButton.dart';
+import 'componentsIntermediate/ProgressBar.dart';
+import 'componentsIntermediate/LanguageIndicator.dart';
+import 'componentsIntermediate/AnimationBox.dart';
 
 class ButtonTransferIntermediate extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _ButtonTransferIntermediateState extends State<ButtonTransferIntermediate>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Advance Level'),
+        title: Text('Intermediate Level'),
         backgroundColor: Colors.blue,
       ),
       body: WillPopScope(

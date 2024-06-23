@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '_servicesiAdvance.dart';
-import 'components/AnimatedButton.dart';
-import 'components/SubmitButton.dart';
-import 'components/ProgressBar.dart';
-import 'components/LanguageIndicator.dart';
-import 'components/AnimationBox.dart';
+import './componentsAdvance/AnimatedButton.dart';
+import './componentsAdvance/SubmitButton.dart';
+import './componentsAdvance/ProgressBar.dart';
+import './componentsAdvance/LanguageIndicator.dart';
+import './componentsAdvance/AnimationBox.dart';
 
 class ButtonTransferAdvance extends StatefulWidget {
   @override
@@ -138,6 +138,7 @@ class _ButtonTransferAdvanceState extends State<ButtonTransferAdvance> {
                   builder: (context, clickedProvider, _) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
+                      // width: 360,
                       height: 200,
                       child: Wrap(
                         alignment: WrapAlignment.center,

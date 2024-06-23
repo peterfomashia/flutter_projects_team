@@ -21,7 +21,8 @@ class IntermediateButtonListProvider with ChangeNotifier {
     "E": [1, 2, 3, 4, 5, 6, 7],
     "F": [1, 2, 3, 4, 5, 6, 7, 8],
     "G": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    "B1": [1, 3, 2, 4],
+    "B1": [2, 1, 3, 4],
+    "C1": [2, 1, 3, 4, 5],
     "F1": [3, 1, 2, 4, 5],
     "D1": [1, 4, 5, 3, 2],
     "G1": [1, 2, 3, 4, 5, 6, 7, 8],
@@ -39,7 +40,7 @@ class IntermediateButtonListProvider with ChangeNotifier {
   Future<void> _loadData() async {
     try {
       String jsonString =
-          await rootBundle.loadString('assets/advance copy.json');
+          await rootBundle.loadString('assets/intermediate.json');
       elementList = List<Map>.from(jsonDecode(jsonString));
       element = List<Map>.from(elementList[indexing]['words']);
       element.shuffle();

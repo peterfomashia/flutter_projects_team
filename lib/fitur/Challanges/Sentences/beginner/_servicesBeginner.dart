@@ -14,17 +14,12 @@ class BeginnerButtonListProvider with ChangeNotifier {
   List<Map> element = [];
   List<int> answer = [];
   Map<String, List<int>> groupAnswerCursor = {
-    "A": [1, 2, 3],
-    "B": [1, 2, 3, 4],
-    "C": [1, 2, 3, 4, 5],
-    "D": [1, 2, 3, 4, 5, 6],
-    "E": [1, 2, 3, 4, 5, 6, 7],
-    "F": [1, 2, 3, 4, 5, 6, 7, 8],
-    "G": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    "B1": [1, 3, 2, 4],
-    "F1": [3, 1, 2, 4, 5],
-    "D1": [1, 4, 5, 3, 2],
-    "G1": [1, 2, 3, 4, 5, 6, 7, 8],
+    "A": [1, 2],
+    "B": [1, 2, 3],
+    "C": [1, 2, 3, 4],
+    "D": [1, 2, 3, 4, 5],
+    "E": [1, 2, 3, 4, 5, 6],
+    "F": [1, 2, 3, 4, 5, 6, 7],
   };
 
   bool showAnimation = false;
@@ -39,7 +34,7 @@ class BeginnerButtonListProvider with ChangeNotifier {
   Future<void> _loadData() async {
     try {
       String jsonString =
-          await rootBundle.loadString('assets/advance copy.json');
+          await rootBundle.loadString('assets/beginnerLevel.json');
       elementList = List<Map>.from(jsonDecode(jsonString));
       element = List<Map>.from(elementList[indexing]['words']);
       element.shuffle();
