@@ -32,16 +32,16 @@ class AnimatedButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all<Color>(
+              backgroundColor: MaterialStateProperty.all<Color>(
                 Colors.blue,
               ),
-              foregroundColor: WidgetStateProperty.all<Color>(
+              foregroundColor: MaterialStateProperty.all<Color>(
                 Colors.white,
               ),
-              padding: WidgetStateProperty.all<EdgeInsets>(
+              padding: MaterialStateProperty.all<EdgeInsets>(
                 EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
               ),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
