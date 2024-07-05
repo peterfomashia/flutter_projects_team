@@ -8,6 +8,8 @@ import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:translator/translator.dart';
 
+import 'fitur/profile/about_yeah.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -366,6 +368,8 @@ class _HomeState extends State<Home> {
           ),
           buildDrawerListTile(
               context, Icons.edit, 'Edit Profile', const Edit()),
+          const Divider(),
+          buildDrawerListTile(context, Icons.info, 'About', AboutYeah()),
           const Divider(),
           buildSwitchListTile(context),
           const SizedBox(height: 30),
