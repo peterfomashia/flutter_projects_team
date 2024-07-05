@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
+import 'package:learning_app/fitur/login_and_regist/auth_prov.dart';
 import 'package:learning_app/fitur/login_and_regist/register.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,13 +19,17 @@ class _LoginState extends State<Login> {
   bool isError = false;
   bool isVisible = false;
 
-  Future<void> _saveLoginStatus(bool isLoggedIn) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isLoggedIn', isLoggedIn);
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<AuthProvider>(context, listen: false).loadRegisterInfo();
+    Provider.of<AuthProvider>(context, listen: false).loadLoginStatus();
   }
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -36,7 +41,7 @@ class _LoginState extends State<Login> {
               CircleAvatar(
                 backgroundColor: Colors.blue,
                 child: Icon(
-                  Icons.book_outlined,
+                  Icons.person,
                   color: Colors.white,
                   size: 80,
                 ),
@@ -52,20 +57,12 @@ class _LoginState extends State<Login> {
                   })
                 },
                 decoration: InputDecoration(
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.email_outlined),
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(color: Colors.lightBlue, width: 2)),
-                  errorText: isError ? "Invalid email or password" : null,
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                  ),
-                ),
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.email_outlined),
+                    enabledBorder: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Colors.lightBlue, width: 2))),
               ),
               SizedBox(height: 30),
               TextField(
@@ -121,13 +118,12 @@ class _LoginState extends State<Login> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    if (email.text == "learningapp@gmail.com" &&
-                        pass.text == "123ok") {
-                      _saveLoginStatus(true);
+                    if (email.text.isEmpty || pass.text.isEmpty) {
+                      isVisible = true;
+                    } else if (authProvider.validateCredentials(email.text, pass.text)) {
+                      authProvider.saveLoginStatus(true);
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => Home()));
-                    } else if (email.text.isEmpty || pass.text.isEmpty) {
-                      isVisible = true;
                     } else {
                       isError = true;
                       email.text = "";

@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
       body: Center(
         child: ElevatedButton(
@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
               MaterialPageRoute(builder: (context) => AboutYeah()),
             );
           },
-          child: Text('Go to About'),
+          child: const Text('Go to About'),
         ),
       ),
     );
@@ -38,10 +38,10 @@ class AboutYeah extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About'),
+        title: const Text('About'),
           backgroundColor: Colors.blue,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -54,13 +54,13 @@ class AboutYeah extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               AboutUsSection(),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               WhyChoose(),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TheTeamHeader(),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TeamGrid(),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               FeaturesSection(),
             ],
           ),
@@ -73,7 +73,7 @@ class AboutYeah extends StatelessWidget {
 class AboutUsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Align(
@@ -91,7 +91,7 @@ class AboutUsSection extends StatelessWidget {
         Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Welcome to the English Learning Application Based on Games. Here, you will enhance your English skills through interactive features such as word matching, translation, dictionary, and constructing sentences.',
               style: TextStyle(fontSize: 16),
@@ -107,7 +107,7 @@ class AboutUsSection extends StatelessWidget {
 class WhyChoose extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Align(
@@ -179,7 +179,7 @@ class WhyChoose extends StatelessWidget {
 class TheTeamHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Align(
+    return const Align(
       alignment: Alignment.center,
       child: Text(
         'THE TEAM',
@@ -245,7 +245,7 @@ class TeamCard extends StatelessWidget {
 
     return Container(
       width: cardWidth,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -254,7 +254,7 @@ class TeamCard extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -268,15 +268,15 @@ class TeamCard extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CircleAvatar(
                 backgroundImage: AssetImage(image),
                 radius: 60,
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
@@ -328,7 +328,7 @@ class MessageBubblePainter extends CustomPainter {
 class FeaturesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Align(
