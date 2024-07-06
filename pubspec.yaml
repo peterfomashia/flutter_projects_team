@@ -42,7 +42,8 @@ dependencies:
   shared_preferences: ^2.0.8
   http: ^1.2.1
   translator: ^1.0.0
-
+  flame_splash_screen: ^0.3.0
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:

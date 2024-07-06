@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/Challanges/etc/word_display.dart';
+import 'package:learning_app/fitur/Challanges/Sentences/HandlerButton.dart';
+import 'package:learning_app/fitur/Challanges/TranslateGames/button_translate.dart';
 import 'package:learning_app/fitur/profile/about_yeah.dart';
 import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
-import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:translator/translator.dart';
 
 class Home extends StatefulWidget {
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
@@ -103,11 +103,11 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const WordDisplay(),
+                          builder: (context) => const HandlerButton(),
                         ),
                       );
                     },
-                    backgroundImage: NetworkImage('https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public'), // Gambar latar belakang dari URL
+                    backgroundImage: const NetworkImage('https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public'), // Gambar latar belakang dari URL
                   ),
                   featureCard(
                     icon: Icons.touch_app_outlined,
@@ -115,11 +115,11 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const Challange(),
+                          builder: (context) => ButtonTranslate(),
                         ),
                       );
                     },
-                    backgroundImage: NetworkImage('https://www.theme-junkie.com/wp-content/uploads/Gaming-font-6.jpeg'), // Gambar latar belakang dari URL
+                    backgroundImage: const NetworkImage('https://www.theme-junkie.com/wp-content/uploads/Gaming-font-6.jpeg'), // Gambar latar belakang dari URL
                   ),
                   // Tambahkan card lainnya di sini jika diperlukan
                 ],
@@ -128,6 +128,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+
     );
   }
 
@@ -136,7 +137,7 @@ class _HomeState extends State<Home> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      elevation: 10,
+      elevation: 20,
       shadowColor: Colors.black54,
       child: Container(
         decoration: BoxDecoration(
@@ -167,7 +168,7 @@ class _HomeState extends State<Home> {
                 ),
                 style: const TextStyle(color: Colors.white),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -184,7 +185,7 @@ class _HomeState extends State<Home> {
                   }),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: translateText,
                 style: ElevatedButton.styleFrom(
@@ -196,7 +197,7 @@ class _HomeState extends State<Home> {
                 ),
                 child: const Text('Translate'),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               Text(
                 _translatedText,
                 style: const TextStyle(
@@ -247,21 +248,34 @@ class _HomeState extends State<Home> {
           borderRadius: BorderRadius.circular(10.0),
         ),
         splashColor: Colors.blueAccent.withOpacity(0.2),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: Colors.white),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: backgroundImage,
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.darken,
               ),
-              textAlign: TextAlign.center,
             ),
-          ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: Colors.white),
+              const SizedBox(height: 10),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -286,9 +300,9 @@ class _HomeState extends State<Home> {
             MaterialPageRoute(builder: (context) => const Challange()),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.backup_table_sharp),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       body: bodyPage(selected),
       bottomNavigationBar: buildBottomNavigationBar(),
     );
@@ -377,7 +391,7 @@ class _HomeState extends State<Home> {
       gapLocation: GapLocation.center,
       activeColor: Colors.blue,
       inactiveColor: Colors.white,
-      notchSmoothness: NotchSmoothness.softEdge,
+      notchSmoothness: NotchSmoothness.verySmoothEdge,
       onTap: (int index) {
         setState(() {
           selected = index;
