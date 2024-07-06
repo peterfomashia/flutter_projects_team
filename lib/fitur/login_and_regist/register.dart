@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/fitur/login_and_regist/auth_prov.dart';
 import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -16,10 +16,25 @@ class _RegisterState extends State<Register> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController passrepeat = TextEditingController();
+  TextEditingController dobController = TextEditingController();
 
   bool isError = false;
   bool isVisible = false;
   bool isSame = false;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        dobController.text = DateFormat('yyyy-MM-dd').format(picked);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +42,20 @@ class _RegisterState extends State<Register> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.symmetric(horizontal: 70, vertical: 100),
+        padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 100),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundColor: Colors.blue,
+                radius: 70,
                 child: Icon(
                   Icons.app_registration,
                   color: Colors.white,
                   size: 80,
                 ),
-                radius: 70,
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               TextField(
                 controller: email,
                 onChanged: (val) => {
@@ -49,7 +64,7 @@ class _RegisterState extends State<Register> {
                     isVisible = false;
                   })
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.email_outlined),
                     enabledBorder: OutlineInputBorder(),
@@ -57,7 +72,7 @@ class _RegisterState extends State<Register> {
                         borderSide:
                         BorderSide(color: Colors.lightBlue, width: 2))),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextField(
                 controller: pass,
                 onChanged: (val) {
@@ -66,7 +81,7 @@ class _RegisterState extends State<Register> {
                     isVisible = false;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Password",
                   prefixIcon: Icon(Icons.lock),
                   enabledBorder: OutlineInputBorder(),
@@ -79,7 +94,7 @@ class _RegisterState extends State<Register> {
                 ),
                 obscureText: true,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextField(
                 controller: passrepeat,
                 onChanged: (val) {
@@ -88,7 +103,7 @@ class _RegisterState extends State<Register> {
                     isVisible = false;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Ulangi Password",
                   prefixIcon: Icon(Icons.lock),
                   enabledBorder: OutlineInputBorder(),
@@ -101,33 +116,40 @@ class _RegisterState extends State<Register> {
                 ),
                 obscureText: true,
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(height: 30),
+              TextField(
+                controller: dobController,
+                readOnly: true,
+                onTap: () => _selectDate(context),
+                decoration: const InputDecoration(
+                  labelText: "Tanggal Lahir",
+                  prefixIcon: Icon(Icons.calendar_today),
+                  enabledBorder: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2)),
+                ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Visibility(
                   visible: isVisible,
-                  child: Text(
-                    "Salahsatu tidak boleh ada yang kosong !",
+                  child: const Text(
+                    "Salah satu tidak boleh ada yang kosong !",
                     style: TextStyle(color: Colors.red),
                   )),
               Visibility(
                   visible: isSame,
-                  child: Text(
+                  child: const Text(
                     "Password harus sama !",
                     style: TextStyle(color: Colors.red),
                   )),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
                     if (email.text.isEmpty ||
                         pass.text.isEmpty ||
-                        passrepeat.text.isEmpty) {
+                        passrepeat.text.isEmpty ||
+                        dobController.text.isEmpty) {
                       isVisible = true;
                       isError = true;
                     } else if (pass.text != passrepeat.text) {
@@ -137,23 +159,23 @@ class _RegisterState extends State<Register> {
                       Provider.of<AuthProvider>(context, listen: false)
                           .saveRegisterInfo(email.text, pass.text);
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Login()));
+                          MaterialPageRoute(builder: (context) => const Login()));
                     }
                   });
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(400, 50),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.blue),
+                child: const Text(
                   "Register",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: Colors.white),
                 ),
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size(400, 50),
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
@@ -163,7 +185,7 @@ class _RegisterState extends State<Register> {
                     alignment: Alignment.center,
                     child: RichText(
                         text: TextSpan(children: [
-                          TextSpan(
+                          const TextSpan(
                             text: "Sudah punya akun ? ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -173,15 +195,15 @@ class _RegisterState extends State<Register> {
                           ),
                           TextSpan(
                               text: "Login !",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue,
                                 fontSize: 18,
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => {
+                                ..onTap = () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Login()))
+                                      builder: (context) => const Login()));
                                 }),
                         ])),
                   )

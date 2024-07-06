@@ -15,8 +15,8 @@ class SplashScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FadeInImage.assetNetwork(
-                placeholder: 'assets/images/loading.gif',
-                image: 'assets/images/logo.png',
+                placeholder: '',
+                image: '',
                 height: 150,
               ),
               SizedBox(height: 20),
