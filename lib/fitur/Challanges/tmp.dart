@@ -87,18 +87,19 @@ class _ChallangeState extends State<Challange> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _buildCard(
-                  "Word Display",
-                  "https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public",
-                  Icons.text_fields,
-                  _navigateToHandlerButton,
-                ),
                 const SizedBox(height: 10),
                 _buildCard(
                   "Button Translate",
                   "https://www.theme-junkie.com/wp-content/uploads/Gaming-font-6.jpeg",
                   Icons.translate,
                   _navigateToButtonTranslate,
+                ),
+                const SizedBox(height: 10),
+                _buildCard(
+                  "Word Display",
+                  "https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public",
+                  Icons.text_fields,
+                  _navigateToHandlerButton,
                 ),
                 const SizedBox(height: 10),
                 _buildCard(

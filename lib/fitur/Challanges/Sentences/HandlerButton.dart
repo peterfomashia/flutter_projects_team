@@ -92,30 +92,34 @@ class _HandlerButtonState extends State<HandlerButton> {
           SingleChildScrollView(
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 600),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _buildCard(
-                    "Beginner",
-                    "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Beginner.jpg",
-                    Icons.star,
-                    _navigateToButtonTransferBeginner,
-                  ),
-                  SizedBox(height: 20),
-                  _buildCard(
-                    "Intermediate",
-                    "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Intermediate.jpg",
-                    Icons.star,
-                    _navigateToButtonTransferIntermediate,
-                  ),
-                  SizedBox(height: 20),
-                  _buildCard(
-                    "Advanced",
-                    "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Upper-Intermediate.jpg",
-                    Icons.star,
-                    _navigateToButtonTransferAdvance,
-                  ),
-                ],
+              child: Container(
+                padding: const EdgeInsets.only(top: 30),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _buildCard(
+                      "Beginner",
+                      "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Beginner.jpg",
+                      Icons.star,
+                      _navigateToButtonTransferBeginner,
+                    ),
+                    SizedBox(height: 25),
+                    _buildCard(
+                      "Intermediate",
+                      "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Intermediate.jpg",
+                      Icons.star,
+                      _navigateToButtonTransferIntermediate,
+                    ),
+                    SizedBox(height: 25),
+                    _buildCard(
+                      "Advanced",
+                      "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Upper-Intermediate.jpg",
+                      Icons.star,
+                      _navigateToButtonTransferAdvance,
+                    ),
+                    SizedBox(height: 25),
+                  ],
+                ),
               ),
             ),
           ),

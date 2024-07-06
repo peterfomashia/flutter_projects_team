@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/Home.dart';
-import 'package:learning_app/fitur/Challanges/TranslateGames/NextLevel.dart';
 import 'package:learning_app/fitur/Challanges/TranslateGames/button_translate.dart';
+import 'package:learning_app/fitur/Challanges/tmp.dart';
 
 class EndGamePage extends StatelessWidget {
   final int points;
@@ -50,7 +50,7 @@ class EndGamePage extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => NextLevel()));
+                                    builder: (context) => Challange()));
                           },
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                           child: Text(

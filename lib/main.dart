@@ -3,7 +3,6 @@ import 'package:learning_app/Home.dart';
 import 'package:learning_app/fitur/login_and_regist/auth_prov.dart';
 import 'package:learning_app/fitur/login_and_regist/login.dart';
 import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
-import 'package:learning_app/splashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'fitur/profile/provider/switchProvider.dart';
@@ -56,10 +55,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: value.themeData,
           title: 'Learning_App',
-          home: SplashScreen(),
-            routes: {
-        '/login': (context) => Login(),
-      },
+          home: const Login(),
         );
       }),
     );

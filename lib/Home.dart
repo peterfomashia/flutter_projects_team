@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
 import 'package:translator/translator.dart';
+import 'fitur/login_and_regist/login.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -351,7 +352,11 @@ class _HomeState extends State<Home> {
           ),
           const SizedBox(height: 20),
           buildSwitchListTile(context),
+          const Divider(endIndent: 25, thickness: 2, color: Colors.blue, height: 20,),
           buildDrawerListTile(context, Icons.info, 'About', AboutYeah()),
+          const Divider(endIndent: 25, thickness: 2, color: Colors.blue, height: 20,),
+          buildDrawerListTile(context, Icons.logout ,'Logout', Login()),
+          const Divider(endIndent: 25, thickness: 2, color: Colors.blue, height: 20,),
         ],
       ),
     );
@@ -377,6 +382,12 @@ class _HomeState extends State<Home> {
       onChanged: (bool val) {
         Provider.of<SwitchModeProvider>(context, listen: false).toggleTheme();
       },
+    );
+  }
+
+  Logout() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => Login()),
     );
   }
 

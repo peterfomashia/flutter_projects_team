@@ -93,7 +93,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                 ),
-                const Divider(thickness: 2),
+                const Divider(thickness: 3),
                 const SizedBox(height: 20),
                 const Text(
                   "Bantuan & Informasi",
