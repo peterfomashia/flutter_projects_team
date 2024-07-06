@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
 import 'package:provider/provider.dart';
 import './_servicesBeginner.dart';
 import 'componentBeginner/AnimatedButton.dart';
@@ -45,7 +46,17 @@ class _ButtonTransferBeginnerState extends State<ButtonTransferBeginner> {
       appBar: AppBar(
         title: Text('Beginner Level'),
         backgroundColor: Colors.blue,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.brightness_6),
+            onPressed: () {
+              Provider.of<SwitchModeProvider>(context, listen: false)
+                  .toggleTheme();
+            },
+          ),
+        ],
       ),
+      // ignore: deprecated_member_use
       body: WillPopScope(
         onWillPop: () async {
           final bool shouldPop = await _showBackDialog(context) ?? false;
@@ -74,11 +85,11 @@ class _ButtonTransferBeginnerState extends State<ButtonTransferBeginner> {
                         child: Text(
                           clickedProvider.elementList[clickedProvider.indexing]
                               ['kalimat'],
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                           textAlign: TextAlign.center,
                         ),
                       );
@@ -203,7 +214,7 @@ class _ButtonTransferBeginnerState extends State<ButtonTransferBeginner> {
                       color: Colors.black.withOpacity(0.7),
                       child: Center(
                         child: Text(
-                          'All sentences explored!',
+                          'Congratulations on successfully completing the Beginner level!',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
