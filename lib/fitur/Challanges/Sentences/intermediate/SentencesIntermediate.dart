@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
 import 'package:provider/provider.dart';
 import '_servicesintermediate.dart';
 import 'componentsIntermediate/AnimatedButton.dart';
@@ -9,10 +10,12 @@ import 'componentsIntermediate/AnimationBox.dart';
 
 class ButtonTransferIntermediate extends StatefulWidget {
   @override
-  _ButtonTransferIntermediateState createState() => _ButtonTransferIntermediateState();
+  _ButtonTransferIntermediateState createState() =>
+      _ButtonTransferIntermediateState();
 }
 
-class _ButtonTransferIntermediateState extends State<ButtonTransferIntermediate> {
+class _ButtonTransferIntermediateState
+    extends State<ButtonTransferIntermediate> {
   Future<bool?> _showBackDialog(BuildContext context) {
     return showDialog<bool>(
       context: context,
@@ -45,6 +48,15 @@ class _ButtonTransferIntermediateState extends State<ButtonTransferIntermediate>
       appBar: AppBar(
         title: Text('Intermediate Level'),
         backgroundColor: Colors.blue,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.brightness_6),
+            onPressed: () {
+              Provider.of<SwitchModeProvider>(context, listen: false)
+                  .toggleTheme();
+            },
+          ),
+        ],
       ),
       body: WillPopScope(
         onWillPop: () async {
@@ -74,11 +86,11 @@ class _ButtonTransferIntermediateState extends State<ButtonTransferIntermediate>
                         child: Text(
                           clickedProvider.elementList[clickedProvider.indexing]
                               ['kalimat'],
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                       );
@@ -203,7 +215,7 @@ class _ButtonTransferIntermediateState extends State<ButtonTransferIntermediate>
                       color: Colors.black.withOpacity(0.7),
                       child: Center(
                         child: Text(
-                          'All sentences explored!',
+                          'Congratulations on successfully completing the Intermediate level!',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),

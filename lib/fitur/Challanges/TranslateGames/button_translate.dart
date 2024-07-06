@@ -52,6 +52,7 @@ class _ButtonTranslateState extends State<ButtonTranslate> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Translate Game'),
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -105,17 +106,20 @@ class _ButtonTranslateState extends State<ButtonTranslate> {
                                 },
                                 child: Text(
                                   pair.key,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                               ),
                             ),
                             SizedBox(
                               height: 60,
                               width: 20,
-                            ), // Menambahkan jarak horizontal antara tombol
+                            ), // Menam
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
@@ -123,10 +127,13 @@ class _ButtonTranslateState extends State<ButtonTranslate> {
                                 },
                                 child: Text(
                                   pair.value,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                               ),
                             ),

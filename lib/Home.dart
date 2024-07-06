@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
+import 'package:learning_app/fitur/Challanges/Sentences/HandlerButton.dart';
+import 'package:learning_app/fitur/Challanges/TranslateGames/button_translate.dart';
+import 'package:learning_app/fitur/profile/about_yeah.dart';
+import 'package:learning_app/fitur/profile/profile.dart';
 import 'package:learning_app/fitur/profile/provider/switchProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:learning_app/fitur/Challanges/tmp.dart';
-import 'package:learning_app/fitur/login_and_regist/login.dart';
-import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:translator/translator.dart';
-
-import 'fitur/profile/about_yeah.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -55,7 +54,7 @@ class _HomeState extends State<Home> {
           ),
         );
       case 1:
-        return const Login();
+        return const Profile();
       default:
         return Container(); // Default widget if index is not found
     }
@@ -90,7 +89,7 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
@@ -99,41 +98,37 @@ class _HomeState extends State<Home> {
                 crossAxisSpacing: 10,
                 children: [
                   featureCard(
-                    icon: Icons.translate,
-                    title: 'Translation',
-                    onTap: () {
-                      // Action for Translation feature
-                    },
-                  ),
-                  featureCard(
-                    icon: Icons.person,
-                    title: 'Profile',
+                    icon: Icons.display_settings_rounded,
+                    title: 'Word Display',
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const Edit(),
+                          builder: (context) => const HandlerButton(),
                         ),
                       );
                     },
+                    backgroundImage: const NetworkImage('https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public'), // Gambar latar belakang dari URL
                   ),
                   featureCard(
-                    icon: Icons.games,
-                    title: 'Challenges',
+                    icon: Icons.touch_app_outlined,
+                    title: 'Button Translate',
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const Challange(),
+                          builder: (context) => ButtonTranslate(),
                         ),
                       );
                     },
+                    backgroundImage: const NetworkImage('https://www.theme-junkie.com/wp-content/uploads/Gaming-font-6.jpeg'), // Gambar latar belakang dari URL
                   ),
-                  // Add more feature cards here if needed
+                  // Tambahkan card lainnya di sini jika diperlukan
                 ],
               ),
             ],
           ),
         ),
       ),
+
     );
   }
 
@@ -142,13 +137,13 @@ class _HomeState extends State<Home> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      elevation: 10,
+      elevation: 20,
       shadowColor: Colors.black54,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           gradient: const LinearGradient(
-            colors: [Colors.deepOrange, Colors.orangeAccent],
+            colors: [Colors.blue, Colors.lightBlueAccent],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -173,7 +168,7 @@ class _HomeState extends State<Home> {
                 ),
                 style: const TextStyle(color: Colors.white),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -190,19 +185,19 @@ class _HomeState extends State<Home> {
                   }),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: translateText,
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.deepOrange,
-                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.white, // Background color
+                  backgroundColor: Colors.blue, // Text color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
                 child: const Text('Translate'),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               Text(
                 _translatedText,
                 style: const TextStyle(
@@ -221,7 +216,7 @@ class _HomeState extends State<Home> {
   Widget _buildDropdownButton(String value, void Function(String?)? onChanged) {
     return DropdownButton<String>(
       value: value,
-      dropdownColor: Colors.orangeAccent,
+      dropdownColor: Colors.blueAccent,
       items: const [
         DropdownMenuItem(
           value: 'en',
@@ -240,6 +235,7 @@ class _HomeState extends State<Home> {
     required IconData icon,
     required String title,
     required Function() onTap,
+    required NetworkImage backgroundImage,
   }) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -248,26 +244,39 @@ class _HomeState extends State<Home> {
       elevation: 3,
       child: InkWell(
         onTap: onTap,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: Colors.white),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
         customBorder: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         splashColor: Colors.blueAccent.withOpacity(0.2),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: backgroundImage,
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.darken,
+              ),
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: Colors.white),
+              const SizedBox(height: 10),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -281,20 +290,9 @@ class _HomeState extends State<Home> {
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blue,
-        actions: selected == 0
-            ? [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              // Handle notification action
-            },
-          ),
-        ]
-            : null,
       ),
       drawer: buildDrawer(context),
       floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         onPressed: () {
           Navigator.push(
@@ -302,9 +300,9 @@ class _HomeState extends State<Home> {
             MaterialPageRoute(builder: (context) => const Challange()),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.backup_table_sharp),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       body: bodyPage(selected),
       bottomNavigationBar: buildBottomNavigationBar(),
     );
@@ -313,79 +311,47 @@ class _HomeState extends State<Home> {
   Drawer buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          Consumer<ProfilProv>(
-            builder: (context, value, _) {
-              return UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://www.example.com/background.jpg"), // Change with your image URL
-                    fit: BoxFit.cover,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.blue,
                   ),
                 ),
-                currentAccountPicture: const CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 60,
-                  child: Icon(Icons.person, color: Colors.blue, size: 60),
-                ),
-                accountName: Row(
-                  children: [
-                    const Icon(Icons.person, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      value.profil.isNotEmpty
-                          ? value.profil[0].nama
-                          : 'Nama Pengguna',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-                accountEmail: Row(
-                  children: [
-                    const Icon(Icons.email, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      value.profil.isNotEmpty
-                          ? value.profil[0].email
-                          : 'email@domain.com',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          buildDrawerListTile(
-              context, Icons.edit, 'Edit Profile', const Edit()),
-          const Divider(),
-          buildDrawerListTile(context, Icons.info, 'About', AboutYeah()),
-          const Divider(),
-          buildSwitchListTile(context),
-          const SizedBox(height: 30),
-          const Divider(),
-          ListTile(
-            trailing: const Icon(Icons.logout, color: Colors.blue),
-            title: const Text(
-              'Logout',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              ],
             ),
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const Login()),
-              );
-            },
           ),
+          const SizedBox(height: 10),
+          const Column(
+            children: [
+              Text(
+                'Welcome to Learning App',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Your gateway to knowledge',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          buildSwitchListTile(context),
+          buildDrawerListTile(context, Icons.info, 'About', AboutYeah()),
         ],
       ),
     );
@@ -420,12 +386,12 @@ class _HomeState extends State<Home> {
       activeIndex: selected,
       icons: const [
         Icons.home,
-        Icons.arrow_circle_left,
+        Icons.person,
       ],
       gapLocation: GapLocation.center,
       activeColor: Colors.blue,
       inactiveColor: Colors.white,
-      notchSmoothness: NotchSmoothness.softEdge,
+      notchSmoothness: NotchSmoothness.verySmoothEdge,
       onTap: (int index) {
         setState(() {
           selected = index;
