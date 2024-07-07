@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-  class AuthProvider with ChangeNotifier {
+class AuthProvider with ChangeNotifier {
   String _email = '';
   String _password = '';
   bool _isLoggedIn = false;
@@ -10,12 +10,13 @@ import 'package:shared_preferences/shared_preferences.dart';
   String get password => _password;
   bool get isLoggedIn => _isLoggedIn;
 
-  UserProfile _profil = UserProfile(nama: '', email: '', alamat: '', picture: '');
+  UserProfile _profil =
+      UserProfile(nama: '', email: '', alamat: '', picture: '');
   UserProfile get profil => _profil;
 
-
   void register(String email, String password) {
-    _profil = UserProfile(nama: 'User', email: email, alamat: '', picture: '');
+    _profil = UserProfile(
+        nama: getNameFromEmail(email), email: email, alamat: '', picture: '');
     notifyListeners();
   }
 
@@ -43,10 +44,10 @@ import 'package:shared_preferences/shared_preferences.dart';
   }
 
   void updateProfil(String nama, String email, String alamat, String picture) {
-    _profil = UserProfile(nama: nama, email: email, alamat: alamat, picture: picture);
+    _profil =
+        UserProfile(nama: nama, email: email, alamat: alamat, picture: picture);
     notifyListeners();
   }
-
 
   Future<void> loadLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,6 +59,9 @@ import 'package:shared_preferences/shared_preferences.dart';
     return _email == email && _password == password;
   }
 
+  String getNameFromEmail(String email) {
+    return email.split('@')[0];
+  }
 }
 
 class UserProfile {

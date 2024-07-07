@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/fitur/profile/about_yeah.dart';
 import 'package:learning_app/fitur/profile/edit.dart';
 import 'package:learning_app/fitur/profile/provider/profil_prov.dart';
-import 'package:learning_app/fitur/profile/switch.dart';
 import 'package:provider/provider.dart';
+import 'package:learning_app/fitur/login_and_regist/auth_prov.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -36,8 +36,10 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
-     body: Consumer<ProfilProv>(builder: (context, value, _) {
+      body: Consumer<ProfilProv>(builder: (context, value, _) {
         return Container(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
@@ -58,7 +60,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        value.profil[0].nama,
+                        authProvider.getNameFromEmail(authProvider.email),
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
@@ -66,7 +68,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        value.profil[0].email,
+                        authProvider.email,
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
@@ -83,13 +85,14 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const Edit()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Edit()));
                   },
                   child: const Text(
                     "Edit Profile",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                 ),
@@ -102,49 +105,56 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    _showDialog(context, "Syarat dan Ketentuan", "Terima kasih telah menggunakan aplikasi kami. Harap dibaca dan pahami syarat dan ketentuan berikut sebelum menggunakan layanan kami:\n\n1. Penggunaan aplikasi ini tunduk pada syarat dan ketentuan yang berlaku.\n\n2. Kami menghargai privasi Anda dan akan melindungi data pribadi sesuai dengan kebijakan privasi kami.\n\n3. Setiap penggunaan yang melanggar ketentuan dapat mengakibatkan pembatasan akses atau penghentian layanan.\n\nTerima kasih atas perhatian Anda.");
+                    _showDialog(context, "Syarat dan Ketentuan",
+                        "Terima kasih telah menggunakan aplikasi kami. Harap dibaca dan pahami syarat dan ketentuan berikut sebelum menggunakan layanan kami:\n\n1. Penggunaan aplikasi ini tunduk pada syarat dan ketentuan yang berlaku.\n\n2. Kami menghargai privasi Anda dan akan melindungi data pribadi sesuai dengan kebijakan privasi kami.\n\n3. Setiap penggunaan yang melanggar ketentuan dapat mengakibatkan pembatasan akses atau penghentian layanan.\n\nTerima kasih atas perhatian Anda.");
                   },
                   child: const Text(
                     "Syarat Dan Ketentuan",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    _showDialog(context, "Pusat Bantuan", "Selamat datang di Pusat Bantuan kami.\n\nKami siap membantu Anda dengan segala pertanyaan atau masalah yang Anda miliki terkait penggunaan aplikasi kami.\n\nSilakan cari jawaban untuk pertanyaan umum di bagian FAQ kami.\n\nJika Anda tidak menemukan jawaban yang Anda cari, jangan ragu untuk menghubungi tim dukungan kami melalui email atau telepon yang tertera di halaman kontak aplikasi.\n\nTerima kasih.");
+                    _showDialog(context, "Pusat Bantuan",
+                        "Selamat datang di Pusat Bantuan kami.\n\nKami siap membantu Anda dengan segala pertanyaan atau masalah yang Anda miliki terkait penggunaan aplikasi kami.\n\nSilakan cari jawaban untuk pertanyaan umum di bagian FAQ kami.\n\nJika Anda tidak menemukan jawaban yang Anda cari, jangan ragu untuk menghubungi tim dukungan kami melalui email atau telepon yang tertera di halaman kontak aplikasi.\n\nTerima kasih.");
                   },
                   child: const Text(
                     "Pusat Bantuan",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  AboutYeah()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => AboutYeah()));
                   },
                   child: const Text(
                     "Tentang Kami",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    _showDialog(context, "Contact Person", "Berikut adalah informasi kontak kami untuk pertanyaan lebih lanjut:\n\nNama: TIM L\nEmail: MahasiswaSmster4@mikroskil.ac.id\nTelepon: 082234548960\n\nJangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih lanjut.\n\nTerima kasih.");
+                    _showDialog(context, "Contact Person",
+                        "Berikut adalah informasi kontak kami untuk pertanyaan lebih lanjut:\n\nNama: TIM L\nEmail: MahasiswaSmster4@mikroskil.ac.id\nTelepon: 082234548960\n\nJangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih lanjut.\n\nTerima kasih.");
                   },
                   child: const Text(
                     "Contact Person",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                 ),

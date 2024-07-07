@@ -110,8 +110,7 @@ class _ButtonTranslateState extends State<ButtonTranslate> {
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
                                       ),
                                 ),
                               ),
@@ -131,8 +130,7 @@ class _ButtonTranslateState extends State<ButtonTranslate> {
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
                                       ),
                                 ),
                               ),

@@ -42,107 +42,151 @@ class _RegisterState extends State<Register> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 100),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue.shade800, Colors.blue.shade200],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                backgroundColor: Colors.blue,
-                radius: 70,
+              SizedBox(height: 30,),
+              CircleAvatar(
+                backgroundColor: Colors.white,
                 child: Icon(
                   Icons.app_registration,
-                  color: Colors.white,
+                  color: Colors.blue,
                   size: 80,
                 ),
+                radius: 70,
               ),
-              const SizedBox(height: 40),
-              TextField(
-                controller: email,
-                onChanged: (val) => {
-                  setState(() {
-                    isError = false;
-                    isVisible = false;
-                  })
-                },
-                decoration: const InputDecoration(
-                    labelText: 'Email',
-                    prefixIcon: Icon(Icons.email_outlined),
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                        BorderSide(color: Colors.lightBlue, width: 2))),
-              ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: pass,
-                onChanged: (val) {
-                  setState(() {
-                    isError = false;
-                    isVisible = false;
-                  });
-                },
-                decoration: const InputDecoration(
-                  labelText: "Password",
-                  prefixIcon: Icon(Icons.lock),
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 2)),
-                  errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2)),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2)),
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: passrepeat,
-                onChanged: (val) {
-                  setState(() {
-                    isError = false;
-                    isVisible = false;
-                  });
-                },
-                decoration: const InputDecoration(
-                  labelText: "Ulangi Password",
-                  prefixIcon: Icon(Icons.lock),
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 2)),
-                  errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2)),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2)),
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: dobController,
-                readOnly: true,
-                onTap: () => _selectDate(context),
-                decoration: const InputDecoration(
-                  labelText: "Tanggal Lahir",
-                  prefixIcon: Icon(Icons.calendar_today),
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 2)),
+              SizedBox(height: 20),
+              Text(
+                "Create Account",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 10),
+              Text(
+                "Please fill the details to register",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(height: 30),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: email,
+                      onChanged: (val) {
+                        setState(() {
+                          isError = false;
+                          isVisible = false;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        prefixIcon: Icon(Icons.email_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    SizedBox(height: 20),
+                    TextField(
+                      controller: pass,
+                      onChanged: (val) {
+                        setState(() {
+                          isError = false;
+                          isVisible = false;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        prefixIcon: Icon(Icons.lock),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        errorText: isError ? "Passwords do not match" : null,
+                      ),
+                      obscureText: true,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    SizedBox(height: 20),
+                    TextField(
+                      controller: passrepeat,
+                      onChanged: (val) {
+                        setState(() {
+                          isError = false;
+                          isVisible = false;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Confirm Password",
+                        prefixIcon: Icon(Icons.lock),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        errorText: isError ? "Passwords do not match" : null,
+                      ),
+                      obscureText: true,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    SizedBox(height: 20),
+                    TextField(
+                      controller: dobController,
+                      readOnly: true,
+                      onTap: () => _selectDate(context),
+                      decoration: InputDecoration(
+                        labelText: "Date of Birth",
+                        prefixIcon: Icon(Icons.calendar_today),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
               Visibility(
-                  visible: isVisible,
-                  child: const Text(
-                    "Salah satu tidak boleh ada yang kosong !",
-                    style: TextStyle(color: Colors.red),
-                  )),
+                visible: isVisible,
+                child: Text(
+                  "All fields must be filled!",
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
               Visibility(
-                  visible: isSame,
-                  child: const Text(
-                    "Password harus sama !",
-                    style: TextStyle(color: Colors.red),
-                  )),
-              const SizedBox(height: 20),
+                visible: isSame,
+                child: Text(
+                  "Passwords do not match!",
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
@@ -158,55 +202,52 @@ class _RegisterState extends State<Register> {
                     } else {
                       Provider.of<AuthProvider>(context, listen: false)
                           .saveRegisterInfo(email.text, pass.text);
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const Login()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Login()));
                     }
                   });
                 },
-                style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(400, 50),
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue),
-                child: const Text(
+                child: Text(
                   "Register",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.white),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(400, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  backgroundColor: Colors.blue.shade700,
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: RichText(
-                        text: TextSpan(children: [
-                          const TextSpan(
-                            text: "Sudah punya akun ? ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          ),
-                          TextSpan(
-                              text: "Login !",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                                fontSize: 18,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => const Login()));
-                                }),
-                        ])),
-                  )
+                  Text(
+                    "Already have an account? ",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Login()));
+                    },
+                    child: Text(
+                      "Login!",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
