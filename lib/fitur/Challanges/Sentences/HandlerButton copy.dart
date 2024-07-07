@@ -102,23 +102,20 @@ class _HandlerButtonState extends State<HandlerButton> {
                       "assets/pict/icons/Beginner.jpg",
                       Icons.star,
                       _navigateToButtonTransferBeginner,
-                      isNetworkImage: false,
                     ),
                     SizedBox(height: 25),
                     _buildCard(
                       "Intermediate",
-                      "assets/pict/icons/Intermediate.jpg",
+                      "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Intermediate.jpg",
                       Icons.star,
                       _navigateToButtonTransferIntermediate,
-                      isNetworkImage: false,
                     ),
                     SizedBox(height: 25),
                     _buildCard(
                       "Advanced",
-                      "assets/pict/icons/Upper-Intermediate.jpg",
+                      "https://www.englishcafe.co.id/wp-content/uploads/2021/02/English-Cafe-Upper-Intermediate.jpg",
                       Icons.star,
                       _navigateToButtonTransferAdvance,
-                      isNetworkImage: false,
                     ),
                     SizedBox(height: 25),
                   ],
@@ -141,8 +138,7 @@ class _HandlerButtonState extends State<HandlerButton> {
   }
 
   Widget _buildCard(String title, String imageUrl, IconData icon,
-      Function(BuildContext) onPressed,
-      {bool isNetworkImage = true}) {
+      Function(BuildContext) onPressed) {
     return InkWell(
       onTap: () {
         onPressed(context);
@@ -157,9 +153,7 @@ class _HandlerButtonState extends State<HandlerButton> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
-              image: isNetworkImage
-                  ? NetworkImage(imageUrl)
-                  : AssetImage(imageUrl) as ImageProvider,
+              image: NetworkImage(imageUrl),
               fit: BoxFit.cover,
             ),
           ),

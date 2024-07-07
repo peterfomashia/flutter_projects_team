@@ -90,35 +90,31 @@ class _ChallangeState extends State<Challange> {
                 const SizedBox(height: 10),
                 _buildCard(
                   "Button Translate",
-                  "https://www.theme-junkie.com/wp-content/uploads/Gaming-font-6.jpeg",
+                  "assets/pict/icons/button translate.webp",
                   Icons.translate,
                   _navigateToButtonTranslate,
+                  isNetworkImage: false,
                 ),
                 const SizedBox(height: 10),
-                _buildCard(
-                  "Word Display",
-                  "https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public",
-                  Icons.text_fields,
-                  _navigateToHandlerButton,
-                ),
+                _buildCard("Word Display", "assets/pict/icons/sentences.jpeg",
+                    Icons.text_fields, _navigateToHandlerButton,
+                    isNetworkImage: false),
                 const SizedBox(height: 10),
-                _buildCard(
-                  "Halaman Challange",
-                  "https://t4.ftcdn.net/jpg/01/29/14/65/360_F_129146509_I99Ijq6C9Z27ZdQq7aMJ8qJuj7oMFlIN.jpg?text=Vocabulary",
-                  Icons.lightbulb,
-                  _navigateToWordListScreen,
-                ),
+                _buildCard("Vocabulary", "assets/pict/icons/vocabullary.jpg",
+                    Icons.lightbulb, _navigateToWordListScreen,
+                    isNetworkImage: false),
               ],
             ),
           ),
         ),
-        if (_loading)
-          LoadingScreen(),
+        if (_loading) LoadingScreen(),
       ],
     );
   }
 
-  Widget _buildCard(String title, String imageUrl, IconData icon, Function(BuildContext) onPressed) {
+  Widget _buildCard(String title, String imageUrl, IconData icon,
+      Function(BuildContext) onPressed,
+      {bool isNetworkImage = true}) {
     return Card(
       elevation: 8,
       shape: RoundedRectangleBorder(
@@ -129,7 +125,9 @@ class _ChallangeState extends State<Challange> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           image: DecorationImage(
-            image: NetworkImage(imageUrl),
+            image: isNetworkImage
+                ? NetworkImage(imageUrl)
+                : AssetImage(imageUrl) as ImageProvider,
             fit: BoxFit.cover,
           ),
         ),

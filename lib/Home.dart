@@ -108,7 +108,9 @@ class _HomeState extends State<Home> {
                         ),
                       );
                     },
-                    backgroundImage: const NetworkImage('https://imagedelivery.net/M-WJkhhMQR3UnTiHqMrwAA/ef9fbecf-0309-4936-7f1c-1a809038ba00/public'), // Gambar latar belakang dari URL
+                    backgroundImage:
+                        const AssetImage('assets/pict/icons/sentences.jpeg'),
+                    isNetworkImage: true, // Menggunakan NetworkImage
                   ),
                   featureCard(
                     icon: Icons.touch_app_outlined,
@@ -120,7 +122,9 @@ class _HomeState extends State<Home> {
                         ),
                       );
                     },
-                    backgroundImage: const NetworkImage('https://www.theme-junkie.com/wp-content/uploads/Gaming-font-6.jpeg'), // Gambar latar belakang dari URL
+                    backgroundImage: const AssetImage(
+                        'assets/pict/icons/button translate.webp'),
+                    isNetworkImage: false, // Menggunakan AssetImage
                   ),
                   // Tambahkan card lainnya di sini jika diperlukan
                 ],
@@ -129,7 +133,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-
     );
   }
 
@@ -236,7 +239,9 @@ class _HomeState extends State<Home> {
     required IconData icon,
     required String title,
     required Function() onTap,
-    required NetworkImage backgroundImage,
+    required ImageProvider
+        backgroundImage, // Menggunakan ImageProvider yang lebih umum
+    required bool isNetworkImage,
   }) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -303,7 +308,8 @@ class _HomeState extends State<Home> {
         },
         child: const Icon(Icons.backup_table_sharp),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       body: bodyPage(selected),
       bottomNavigationBar: buildBottomNavigationBar(),
     );
@@ -352,11 +358,26 @@ class _HomeState extends State<Home> {
           ),
           const SizedBox(height: 20),
           buildSwitchListTile(context),
-          const Divider(endIndent: 25, thickness: 2, color: Colors.blue, height: 20,),
+          const Divider(
+            endIndent: 25,
+            thickness: 2,
+            color: Colors.blue,
+            height: 20,
+          ),
           buildDrawerListTile(context, Icons.info, 'About', AboutYeah()),
-          const Divider(endIndent: 25, thickness: 2, color: Colors.blue, height: 20,),
-          buildDrawerListTile(context, Icons.logout ,'Logout', Login()),
-          const Divider(endIndent: 25, thickness: 2, color: Colors.blue, height: 20,),
+          const Divider(
+            endIndent: 25,
+            thickness: 2,
+            color: Colors.blue,
+            height: 20,
+          ),
+          buildDrawerListTile(context, Icons.logout, 'Logout', Login()),
+          const Divider(
+            endIndent: 25,
+            thickness: 2,
+            color: Colors.blue,
+            height: 20,
+          ),
         ],
       ),
     );
