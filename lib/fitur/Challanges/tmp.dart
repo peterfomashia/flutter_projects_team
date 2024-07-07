@@ -84,26 +84,28 @@ class _ChallangeState extends State<Challange> {
           ),
           body: Container(
             padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                _buildCard(
-                  "Button Translate",
-                  "assets/pict/icons/button translate.webp",
-                  Icons.translate,
-                  _navigateToButtonTranslate,
-                  isNetworkImage: false,
-                ),
-                const SizedBox(height: 10),
-                _buildCard("Word Display", "assets/pict/icons/sentences.jpeg",
-                    Icons.text_fields, _navigateToHandlerButton,
-                    isNetworkImage: false),
-                const SizedBox(height: 10),
-                _buildCard("Vocabulary", "assets/pict/icons/vocabullary.jpg",
-                    Icons.lightbulb, _navigateToWordListScreen,
-                    isNetworkImage: false),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    "Button Translate",
+                    "assets/pict/icons/button translate.webp",
+                    Icons.translate,
+                    _navigateToButtonTranslate,
+                    isNetworkImage: false,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildCard("Word Display", "assets/pict/icons/sentences.jpeg",
+                      Icons.text_fields, _navigateToHandlerButton,
+                      isNetworkImage: false),
+                  const SizedBox(height: 10),
+                  _buildCard("Vocabulary", "assets/pict/icons/vocabullary.jpg",
+                      Icons.lightbulb, _navigateToWordListScreen,
+                      isNetworkImage: false),
+                ],
+              ),
             ),
           ),
         ),
